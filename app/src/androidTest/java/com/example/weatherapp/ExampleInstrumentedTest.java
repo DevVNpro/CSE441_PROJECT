@@ -1,4 +1,4 @@
-package com.example.theatermanagement;
+package com.example.weatherapp;
 
 import android.content.Context;
 
