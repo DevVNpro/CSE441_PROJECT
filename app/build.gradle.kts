@@ -41,6 +41,9 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
+    // https://mvnrepository.com/artifact/com.google.android.gms/play-services-location
+    implementation("com.google.android.gms:play-services-location:21.3.0")
+
     // https://mvnrepository.com/artifact/com.google.code.gson/gson
     implementation("com.google.code.gson:gson:2.11.0")
 }
