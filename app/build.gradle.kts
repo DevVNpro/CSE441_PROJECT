@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.theatermanagement"
+    namespace = "com.example.weatherapp"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.theatermanagement"
+        applicationId = "com.example.weatherapp"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -32,7 +32,7 @@ android {
 }
 
 dependencies {
-
+    implementation("com.android.volley:volley:1.2.1")
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
