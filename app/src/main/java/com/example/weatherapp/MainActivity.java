@@ -26,7 +26,8 @@ import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
     EditText ed;
-    TextView txt;
+    TextView  txt,txtName,txtWeatherStatus, txtMinMaxTemp;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
 
         ed = findViewById(R.id.editCity);
         txt = findViewById(R.id.txtTemp);
+        txtName = findViewById(R.id.txtCityName);
+        txtWeatherStatus = findViewById(R.id.txtWeatherStatus);
+        txtMinMaxTemp =findViewById(R.id.txtMinMaxTemp);
 
     }
 
@@ -57,6 +61,22 @@ public class MainActivity extends AppCompatActivity {
                     String temp = object.getString("temp");
                     Double tempdb= Double.parseDouble(temp) -273.15;
                     txt.setText(tempdb.toString().substring(0,4)+" °C");
+
+                    String cityName = response.getString("name");
+                    txtName.setText(cityName);
+
+                    JSONObject weatherObject = response.getJSONArray("weather").getJSONObject(0);
+                    String weatherDescription = weatherObject.getString("description");
+                    txtWeatherStatus.setText(weatherDescription);
+
+                    String tempMin = object.getString("temp_min");
+                    String tempMax = object.getString("temp_max");
+                    Double tempMinC = Double.parseDouble(tempMin) - 273.15;
+                    Double tempMaxC = Double.parseDouble(tempMax) - 273.15;
+                    txtMinMaxTemp.setText("Min: " + tempMinC.toString().substring(0, 4) + " °C | Max: " + tempMaxC.toString().substring(0, 4) + " °C");
+
+                //    getHourlyForecast(city, apiKey);
+               //     getDailyForecast(city, apiKey);
                 } catch (JSONException e) {
                     Toast.makeText(MainActivity.this,e.toString(),Toast.LENGTH_SHORT).show();
                 }

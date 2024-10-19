@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -8,61 +9,115 @@
     android:background="#F6F3F3"
     tools:context=".MainActivity">
 
+    <!-- City Name -->
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/txtCityName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="WEATHER"
-        android:textColor="#F23333"
-        android:textColorLink="#FFFFFF"
-        android:textSize="48sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="City Name"
+        android:textSize="24sp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.208" />
-
-    <Button
-        android:id="@+id/btnGetData"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="GetData"
-        android:text="GETDATA"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.1" />
 
+    <!-- Current Temperature -->
     <TextView
         android:id="@+id/txtTemp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        android:text="Temperature"
+        android:textSize="36sp"
+        app:layout_constraintTop_toBottomOf="@+id/txtCityName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.408"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.05" />
+
+    <!-- Weather Status -->
+    <TextView
+        android:id="@+id/txtWeatherStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sunny or not"
+        app:layout_constraintTop_toBottomOf="@+id/txtTemp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.05" />
+
+    <!-- Min/Max Temperature -->
+    <TextView
+        android:id="@+id/txtMinMaxTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Min/Max Temperature"
+        app:layout_constraintTop_toBottomOf="@+id/txtWeatherStatus"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.05" />
+
+    <!-- 12-Hour Forecast -->
+    <TextView
+        android:id="@+id/txt12HourForecast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="12-Hour Forecast"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@+id/txtMinMaxTemp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.05" />
+
+    <ListView
+        android:id="@+id/list12HourForecast"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/txt12HourForecast"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.05" />
+
+    <!-- Daily Forecast -->
+    <TextView
+        android:id="@+id/txtDailyForecast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Daily Forecast"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@+id/list12HourForecast"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.05" />
+
+    <ListView
+        android:id="@+id/listDailyForecast"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/txtDailyForecast"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.05" />
 
     <EditText
         android:id="@+id/editCity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="84dp"
+        android:layout_height="50dp"
         android:ems="10"
         android:inputType="text"
-        android:text="City"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.307"
+        android:text="Name"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="32dp"
         tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/Btn_GetData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="GetData"
+        android:layout_marginTop="80dp"
+        android:text="Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.04"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
