@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Màu nền gradient -->
+    <color name="sky_blue_start">#42A5F5</color>  <!-- Màu xanh đậm -->
+    <color name="sky_blue_end">#90CAF9</color>    <!-- Màu xanh nhạt -->
+
+    <!-- Màu mặt trời -->
+    <color name="sun_yellow">#FFA726</color>      <!-- Màu vàng cam -->
+
+    <!-- Màu mây -->
+    <color name="cloud_white">#FFFFFF</color>     <!-- Màu trắng -->
 </resources>
