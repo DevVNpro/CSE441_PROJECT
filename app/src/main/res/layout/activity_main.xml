@@ -1,13 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--Thuc update giao dien home-->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/purple_background"
     android:padding="16dp">
 
-    <!-- Header with Location and Current Temperature -->
+    <!-- Current Weather Icon and Description -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <ImageView
+            android:id="@+id/weather_icon"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/cloudy_sunny" />
+
+        <TextView
+            android:id="@+id/weather_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mostly Cloudy"
+            android:textSize="20sp"
+            android:textColor="@android:color/white"
+            android:gravity="center_horizontal" />
+    </LinearLayout>
+
+    <!-- Current Temperature and Time -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:paddingTop="16dp">
+
+        <TextView
+            android:id="@+id/current_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mon June 17 | 10:00 AM"
+            android:textSize="16sp"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/current_temperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="25°"
+            android:textSize="72sp"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/high_low_temperatures"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="H:27° L:18°"
+            android:textSize="18sp"
+            android:textColor="@android:color/white"
+            android:paddingBottom="16dp" />
+    </LinearLayout>
+
+    <!-- Weather Details: Rain, Wind Speed, Humidity -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,105 +74,100 @@
         android:gravity="center_horizontal"
         android:paddingBottom="16dp">
 
-        <!-- Location (Hà Nội) -->
-        <TextView
-            android:id="@+id/location"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hà Nội"
-            android:textColor="@color/black"
-            android:textSize="28sp"
-            android:textStyle="bold" />
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/rain_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/rain" />
+
+            <TextView
+                android:id="@+id/rain_percentage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="22%"
+                android:textSize="16sp"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/wind_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/wind" />
+
+            <TextView
+                android:id="@+id/wind_speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="12 km/h"
+                android:textSize="16sp"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/get_weather_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:onClick="GetData"
+                android:padding="8dp"
+                android:text="Get Weather" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/humidity_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/humidity" />
+
+            <TextView
+                android:id="@+id/humidity_percentage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="18%"
+                android:textSize="16sp"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
     </LinearLayout>
 
-    <!-- Current Temperature -->
+    <!-- Hourly Forecast (RecyclerView) -->
     <TextView
-        android:id="@+id/current_temperature"
+        android:id="@+id/hourly_forecast_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center_horizontal"
-        android:text="28°"
-        android:textColor="@color/black"
-        android:textSize="60sp" />
-
-    <!-- Weather Description (Có nắng) -->
-
-    <TextView
-        android:id="@+id/weather_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center_horizontal"
-        android:text="Có nắng"
-        android:textColor="@color/black"
-        android:textSize="18sp" />
-
-    <!-- High and Low Temperatures -->
-    <TextView
-        android:id="@+id/high_low_temperatures"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center_horizontal"
-        android:paddingBottom="16dp"
-        android:text="C:30° T:19°"
-        android:textColor="@color/black"
-        android:textSize="16sp" />
-
-    <!-- RecyclerView for Hourly Forecast -->
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="GetData"
-        android:text="Button" />
+        android:text="Today"
+        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        android:padding="8dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/hourly_forecast_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="horizontal"
+        android:layout_height="179dp"
         android:orientation="horizontal"
-        android:padding="8dp" />
-
-    <!-- 10 Day Forecast -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingTop="16dp">
-
-        <!-- Each day in the 10-day forecast -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingVertical="8dp">
-
-            <!-- Day Name -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Hôm nay"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-
-            <!-- Temperature Range -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="end"
-                android:text="19° / 30°"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-        </LinearLayout>
-
-        <!-- Add additional days as needed -->
-
-    </LinearLayout>
+        android:padding="8dp"
+        android:scrollbars="horizontal" />
 
 </LinearLayout>
+

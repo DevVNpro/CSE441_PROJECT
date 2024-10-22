@@ -1,32 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="80dp"
+    android:layout_height="180dp"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:gravity="center"
+    android:layout_marginStart="5dp"
+    tools:ignore="ExtraText">
+
 
     <ImageView
         android:id="@+id/forecast_icon"
-        android:layout_width="40dp"
+        android:layout_width="49dp"
         android:layout_height="40dp"
-        android:src="@android:drawable/ic_dialog_map" />
-
+        android:src="@drawable/cloudy_sunny" />
     <TextView
         android:id="@+id/tempTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="28°"
-        android:textColor="@color/black"
-        android:textSize="16sp" />
+        android:text="25°C"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        tools:ignore="HardcodedText" />
 
     <TextView
         android:id="@+id/descTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="Có nắng"
-        android:textColor="@color/black"
-        android:textSize="14sp" />
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="Cloudy"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:gravity="center"
+        tools:ignore="HardcodedText" />
 
 </LinearLayout>

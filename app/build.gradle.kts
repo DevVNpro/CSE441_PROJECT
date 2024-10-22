@@ -32,7 +32,7 @@ android {
 }
 
 dependencies {
-    implementation("com.android.volley:volley:1.2.1")
+    implementation(libs.volley.v121)
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -40,4 +40,6 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation (libs.core)
+    implementation (libs.volley.v121)
 }

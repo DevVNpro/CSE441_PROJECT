@@ -2,6 +2,7 @@ package com.example.weatherapp;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -62,21 +63,22 @@ public class MainActivity extends AppCompatActivity {
     public void GetData(View view) {
         String apiKey = "ca0cc331f07186dbfb8156dbecaa91db";
         String city = "Ha Noi";
-        String url = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + apiKey;
+        String url = "https://api.openweathermap.org/data/2.5/forecast?q=Ha%20Noi&appid=ca0cc331f07186dbfb8156dbecaa91db";
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
+                    @SuppressLint("NotifyDataSetChanged")
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-
+                            Log.d("WeatherResponse", response.toString());
                             // Lấy dữ liệu dự báo
                             JSONArray list = response.getJSONArray("list");
                             List<HourlyForecast> hourlyForecastList = new ArrayList<>();
 
-                            // Lặp qua danh sách và chỉ lấy 8 mục (24 giờ, mỗi mục là 3 giờ)
-                            for (int i = 0; i < 24; i++) {
+                            // Lặp qua danh sách và chỉ lấy 8 mục (12 giờ, mỗi mục là 3 giờ)
+                            for (int i = 0; i < 12; i++) {
                                 JSONObject forecast = list.getJSONObject(i);
                                 JSONObject main = forecast.getJSONObject("main");
                                 JSONArray weatherArray = forecast.getJSONArray("weather");
@@ -87,13 +89,13 @@ public class MainActivity extends AppCompatActivity {
                                 String description = weather.getString("description");
 
                                 // Thêm vào danh sách dự báo
-                                String formattedTemp = String.format("%.1f", temp);
+                                @SuppressLint("DefaultLocale") String formattedTemp = String.format("%.1f", temp);
                                 hourlyForecastList.add(new HourlyForecast(formattedTemp, description, 0));
                             }
 
                             // Cập nhật adapter với dữ liệu mới
                             hourlyForecastAdapter.updateForecastList(hourlyForecastList);
-
+                            hourlyForecastAdapter.notifyDataSetChanged();
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Toast.makeText(MainActivity.this, "Error parsing weather data", Toast.LENGTH_SHORT).show();
