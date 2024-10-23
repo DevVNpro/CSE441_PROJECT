@@ -46,4 +46,8 @@ dependencies {
 
     // https://mvnrepository.com/artifact/com.google.code.gson/gson
     implementation("com.google.code.gson:gson:2.11.0")
+
+    // https://mvnrepository.com/artifact/com.google.firebase/firebase-database
+    implementation("com.google.firebase:firebase-database:21.0.0")
+
 }
