@@ -4,10 +4,13 @@ import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -38,6 +41,7 @@ public class HourlyForecastAdapter extends RecyclerView.Adapter<HourlyForecastAd
 
         // Nếu bạn muốn hiển thị mô tả thời tiết thay vì thời gian, sửa lại dòng này
         holder.descTextView.setText(forecast.getDescription()); // Thay vì forecast.getTime()
+
     }
 
     @Override
@@ -55,6 +59,7 @@ public class HourlyForecastAdapter extends RecyclerView.Adapter<HourlyForecastAd
 
 
     static class HourlyForecastViewHolder extends RecyclerView.ViewHolder {
+        public ImageView weatherIconImageView;
         TextView tempTextView, descTextView;
 
         public HourlyForecastViewHolder(@NonNull View itemView) {

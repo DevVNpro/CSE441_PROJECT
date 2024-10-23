@@ -9,6 +9,7 @@ public class HourlyForecast {
         this.temperature = temperature;
         this.description = description;
         this.time = String.valueOf(time);
+
     }
 
     public String getTemperature() {
@@ -22,4 +23,5 @@ public class HourlyForecast {
     public String getTime() {
         return time;
     }
+
 }

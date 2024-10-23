@@ -42,4 +42,6 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     implementation (libs.core)
     implementation (libs.volley.v121)
+    implementation (libs.picasso)
+
 }
