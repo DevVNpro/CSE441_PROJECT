@@ -43,5 +43,7 @@ dependencies {
     implementation (libs.core)
     implementation (libs.volley.v121)
     implementation (libs.picasso)
+    // https://mvnrepository.com/artifact/com.google.android.gms/play-services-location
+    implementation("com.google.android.gms:play-services-location:21.3.0")
 
 }
