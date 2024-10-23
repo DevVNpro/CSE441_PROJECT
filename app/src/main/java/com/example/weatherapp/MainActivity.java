@@ -18,7 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.squareup.picasso.Picasso;
+//import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
 //                            weatherIconImageView.setImageResource(resourceId);
                             String iconCode = weather.getString("icon");
                             String iconUrl = "https://openweathermap.org/img/wn/" + iconCode + "@2x.png";
-                            Picasso.get().load(iconUrl).into(weatherIconImageView);
+    //                        Picasso.get().load(iconUrl).into(weatherIconImageView);
 
 
                             // Cập nhật dự báo theo giờ
