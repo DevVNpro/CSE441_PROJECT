@@ -1,0 +1,11 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Gradient nền giống bầu trời đêm -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:startColor="#000428"
+            android:endColor="#004e92"
+            android:angle="270" />
+        </shape>
+    </item>
+</layer-list>
