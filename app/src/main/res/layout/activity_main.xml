@@ -43,6 +43,15 @@
         android:paddingTop="16dp">
 
         <TextView
+            android:id="@+id/city_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Location"
+            android:textSize="22sp"
+            android:textColor="@android:color/white"
+            android:gravity="center_horizontal"
+            android:paddingBottom="8dp" />
+        <TextView
             android:id="@+id/current_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -127,7 +136,9 @@
                 android:layout_gravity="center_horizontal"
                 android:onClick="GetData"
                 android:padding="8dp"
-                android:text="Get Weather" />
+                android:layout_marginTop="2dp"
+                android:text="Get Weather"
+                android:backgroundTint="@color/orange"/>
 
         </LinearLayout>
 
@@ -156,6 +167,7 @@
     </LinearLayout>
 
     <!-- Hourly Forecast (RecyclerView) -->
+
     <TextView
         android:id="@+id/hourly_forecast_label"
         android:layout_width="wrap_content"
@@ -168,7 +180,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/hourly_forecast_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="175dp"
+        android:layout_height="133dp"
         android:orientation="horizontal"
         android:padding="8dp"
         android:scrollbars="horizontal" />
