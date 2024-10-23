@@ -62,9 +62,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void GetData(View view) {
         String apiKey = "ca0cc331f07186dbfb8156dbecaa91db";
-        String city = "Ha Noi";
-        String url = "https://api.openweathermap.org/data/2.5/forecast?q=Ha%20Noi&appid=ca0cc331f07186dbfb8156dbecaa91db";
+        String city = "Ha Noi"; // Thành phố
+        String url = "https://api.openweathermap.org/data/2.5/forecast?q=" + city.replace(" ", "%20") + "&appid=" + apiKey;
+
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {

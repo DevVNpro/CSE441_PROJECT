@@ -2,6 +2,7 @@
 <!--Thuc update giao dien home-->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,7 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        tools:ignore="UseCompoundDrawables">
 
         <ImageView
             android:id="@+id/weather_icon"
@@ -79,7 +81,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center_horizontal"
-            android:padding="8dp">
+            android:padding="8dp"
+            tools:ignore="UseCompoundDrawables">
 
             <ImageView
                 android:id="@+id/rain_icon"
@@ -133,7 +136,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center_horizontal"
-            android:padding="8dp">
+            android:padding="8dp"
+            tools:ignore="UseCompoundDrawables">
 
             <ImageView
                 android:id="@+id/humidity_icon"
@@ -164,10 +168,47 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/hourly_forecast_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="179dp"
+        android:layout_height="175dp"
         android:orientation="horizontal"
         android:padding="8dp"
         android:scrollbars="horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+
+        <ImageView
+            android:id="@+id/icon_map"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_weight="10"
+            android:paddingTop="5dp"
+            android:paddingEnd="10dp"
+            android:src="@drawable/map"
+            app:tint="#FFFFFF"
+            tools:ignore="RtlSymmetry" />
+
+
+        <View
+            android:layout_width="600dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="10" />
+
+
+        <ImageView
+            android:id="@+id/icon_hamberger"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_weight="10"
+            android:src="@drawable/hamberger"
+            app:tint="#FFFFFF" />
+    </LinearLayout>
 
 </LinearLayout>
 
