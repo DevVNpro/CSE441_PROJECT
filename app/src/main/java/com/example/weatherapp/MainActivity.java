@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
 //                            weatherIconImageView.setImageResource(resourceId);
                             String iconCode = weather.getString("icon");
                             String iconUrl = "https://openweathermap.org/img/wn/" + iconCode + "@2x.png";
-    //                        Picasso.get().load(iconUrl).into(weatherIconImageView);
+                            //                        Picasso.get().load(iconUrl).into(weatherIconImageView);
 
 
                             // Cập nhật dự báo theo giờ

@@ -14,14 +14,14 @@ public class CityActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_city);
+     //   setContentView(R.layout.activity_city);
 
         // Khởi tạo SharedPreferencesControl và CityManager
         SharedPreferencesControl sharedPreferencesControl = new SharedPreferencesControl(this);
         cityManager = new CityManager(sharedPreferencesControl);
 
         // Tìm TextView để hiển thị danh sách thành phố
-        txtCities = findViewById(R.id.txt_cities);
+     //   txtCities = findViewById(R.id.txt_cities);
 
         // Lấy danh sách các thành phố và hiển thị
         Set<String> cities = cityManager.getAllCities();

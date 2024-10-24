@@ -30,7 +30,7 @@ public class WeatherActivity extends AppCompatActivity {
     private FusedLocationProviderClient fusedLocationProviderClient;
     private TextView tvLocation, tvTemperature;
     private Button btnFetchWeather;
-    private final String API_KEY = "96b20cc6216333159a8e894ba26d0eea"; // OpenWeatherMap API key
+    private final String API_KEY = "your_api_key_here"; // OpenWeatherMap API key
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

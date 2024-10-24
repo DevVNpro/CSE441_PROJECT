@@ -20,7 +20,7 @@ public class CityViewHolder {
 
     public void bind(final DailyForecast city, final AdapterView.OnItemClickListener listener) {
         // Gán dữ liệu thành phố vào các TextView
-        txtCityName.setText(city.getName());
+    /*    txtCityName.setText(city.getName());
         txtTemp.setText("Nhiệt độ: " + city.getTemperature() + "°C");
         txtHigh.setText("Cao nhất: " + city.getHighTemp() + "°C");
         txtLow.setText("Thấp nhất: " + city.getLowTemp() + "°C");
@@ -32,6 +32,6 @@ public class CityViewHolder {
             public void onClick(View v) {
                 listener.onItemClick(city);
             }
-        });
+        });*/
     }
 }

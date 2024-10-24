@@ -17,13 +17,14 @@
         android:layout_height="40dp"
         android:src="@drawable/cloudy_sunny"
         android:paddingTop="5dp"/>
+
     <TextView
         android:id="@+id/tempTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="25°C"
+        android:textColor="@color/design_default_color_on_secondary"
         android:textSize="18sp"
-        android:textColor="@android:color/white"
         tools:ignore="HardcodedText" />
 
     <TextView
@@ -32,7 +33,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="Cloudy"
-        android:textColor="@android:color/white"
+        android:textColor="@color/design_default_color_on_secondary"
         android:textSize="16sp"
         tools:ignore="HardcodedText" />
 

@@ -7,7 +7,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/purple_background"
     android:padding="16dp">
 
     <!-- Current Weather Icon and Description -->
@@ -28,10 +27,13 @@
             android:id="@+id/weather_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="#BF3535"
+            android:backgroundTint="#10FFFFFF"
+            android:foregroundTint="#FFF7F7"
+            android:gravity="center_horizontal"
             android:text="Mostly Cloudy"
-            android:textSize="20sp"
-            android:textColor="@android:color/white"
-            android:gravity="center_horizontal" />
+            android:textColor="@color/design_default_color_on_secondary"
+            android:textSize="20sp" />
     </LinearLayout>
 
     <!-- Current Temperature and Time -->
@@ -46,35 +48,48 @@
             android:id="@+id/city_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Location"
-            android:textSize="22sp"
-            android:textColor="@android:color/white"
+            android:background="#BF3535"
+            android:backgroundTint="#10FFFFFF"
+            android:foregroundTint="#FFF7F7"
             android:gravity="center_horizontal"
-            android:paddingBottom="8dp" />
+            android:paddingBottom="8dp"
+            android:text="Location"
+            android:textColor="@color/design_default_color_on_secondary"
+            android:textSize="22sp" />
+
         <TextView
             android:id="@+id/current_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="#BF3535"
+            android:backgroundTint="#10FFFFFF"
+            android:foregroundTint="#FFF7F7"
             android:text="Mon June 17 | 10:00 AM"
-            android:textSize="16sp"
-            android:textColor="@android:color/white" />
+            android:textColor="@color/design_default_color_on_secondary"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/current_temperature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="#BF3535"
+            android:backgroundTint="#10FFFFFF"
+            android:foregroundTint="#FFF7F7"
             android:text="25°"
-            android:textSize="72sp"
-            android:textColor="@android:color/white" />
+            android:textColor="@color/design_default_color_on_secondary"
+            android:textSize="72sp" />
 
         <TextView
             android:id="@+id/high_low_temperatures"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="#BF3535"
+            android:backgroundTint="#10FFFFFF"
+            android:foregroundTint="#FFF7F7"
+            android:paddingBottom="16dp"
             android:text="H:27° L:18°"
-            android:textSize="18sp"
-            android:textColor="@android:color/white"
-            android:paddingBottom="16dp" />
+            android:textColor="@color/design_default_color_on_secondary"
+            android:textSize="18sp" />
     </LinearLayout>
 
     <!-- Weather Details: Rain, Wind Speed, Humidity -->
@@ -88,8 +103,11 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:background="#BF3535"
+            android:backgroundTint="#10FFFFFF"
+            android:foregroundTint="#FFF7F7"
             android:gravity="center_horizontal"
+            android:orientation="vertical"
             android:padding="8dp"
             tools:ignore="UseCompoundDrawables">
 
@@ -103,9 +121,12 @@
                 android:id="@+id/rain_percentage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="#BF3535"
+                android:backgroundTint="#10FFFFFF"
+                android:foregroundTint="#FFF7F7"
                 android:text="22%"
-                android:textSize="16sp"
-                android:textColor="@android:color/white" />
+                android:textColor="@color/design_default_color_on_secondary"
+                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -125,9 +146,12 @@
                 android:id="@+id/wind_speed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="#BF3535"
+                android:backgroundTint="#10FFFFFF"
+                android:foregroundTint="#FFF7F7"
                 android:text="12 km/h"
-                android:textSize="16sp"
-                android:textColor="@android:color/white" />
+                android:textColor="@color/design_default_color_on_secondary"
+                android:textSize="16sp" />
 
             <Button
                 android:id="@+id/get_weather_button"
@@ -138,7 +162,7 @@
                 android:padding="8dp"
                 android:layout_marginTop="2dp"
                 android:text="Get Weather"
-                android:backgroundTint="@color/orange"/>
+                />
 
         </LinearLayout>
 
@@ -161,8 +185,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="18%"
-                android:textSize="16sp"
-                android:textColor="@android:color/white" />
+                android:textColor="@color/design_default_color_on_secondary"
+                android:textSize="16sp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -172,10 +196,10 @@
         android:id="@+id/hourly_forecast_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="8dp"
         android:text="Today"
-        android:textSize="18sp"
-        android:textColor="@android:color/white"
-        android:padding="8dp" />
+        android:textColor="@color/design_default_color_on_secondary"
+        android:textSize="18sp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/hourly_forecast_recycler_view"
