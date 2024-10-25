@@ -153,17 +153,6 @@
                 android:textColor="@color/design_default_color_on_secondary"
                 android:textSize="16sp" />
 
-            <Button
-                android:id="@+id/get_weather_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:onClick="GetData"
-                android:padding="8dp"
-                android:layout_marginTop="2dp"
-                android:text="Get Weather"
-                />
-
         </LinearLayout>
 
         <LinearLayout
@@ -244,6 +233,20 @@
             android:layout_weight="10"
             android:src="@drawable/hamberger"
             app:tint="#FFFFFF" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_City"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="City Manager"
+            android:onClick="OnClickCityActivity"
+            android:textColorLink="#66B369" />
     </LinearLayout>
 
 </LinearLayout>

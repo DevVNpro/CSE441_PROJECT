@@ -1,6 +1,6 @@
 package com.example.weatherapp;
 
-public class DailyForecast {
+public class SimpleForecast {
     private String day;
     private String description;
     private float minTemp;

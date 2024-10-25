@@ -26,6 +26,8 @@
 
         <!-- Các Activity khác -->
         <activity android:name=".CurrentLocationWeatherActivity"/>
+        <activity android:name=".CityForecastActivity" />
+
     </application>
     <supports-screens
         android:smallScreens="true"
