@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--Thuc update giao dien home-->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,32 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/purple_background"
+    android:background="@drawable/background_gradient"
     android:padding="16dp">
 
-    <!-- Current Weather Icon and Description -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
-        tools:ignore="UseCompoundDrawables">
-
-        <ImageView
-            android:id="@+id/weather_icon"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/cloudy_sunny" />
-
-        <TextView
-            android:id="@+id/weather_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Mostly Cloudy"
-            android:textSize="20sp"
-            android:textColor="@android:color/white"
-            android:gravity="center_horizontal" />
-    </LinearLayout>
 
     <!-- Current Temperature and Time -->
     <LinearLayout
@@ -40,7 +16,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center_horizontal"
-        android:paddingTop="16dp">
+        android:paddingTop="10dp">
 
         <TextView
             android:id="@+id/city_name"
@@ -81,15 +57,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:gravity="center_horizontal"
-        android:paddingBottom="16dp">
+        android:orientation="horizontal"
+        android:paddingBottom="2dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:gravity="center_horizontal"
+            android:orientation="vertical"
             android:padding="8dp"
             tools:ignore="UseCompoundDrawables">
 
@@ -104,15 +80,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="22%"
-                android:textSize="16sp"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:gravity="center_horizontal"
+            android:orientation="vertical"
             android:padding="8dp">
 
             <ImageView
@@ -126,27 +102,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="12 km/h"
-                android:textSize="16sp"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
 
             <Button
                 android:id="@+id/get_weather_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginTop="2dp"
+                android:backgroundTint="@color/orange"
                 android:onClick="GetData"
                 android:padding="8dp"
-                android:layout_marginTop="2dp"
-                android:text="Get Weather"
-                android:backgroundTint="@color/orange"/>
+                android:text="Get Weather" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:gravity="center_horizontal"
+            android:orientation="vertical"
             android:padding="8dp"
             tools:ignore="UseCompoundDrawables">
 
@@ -161,8 +137,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="18%"
-                android:textSize="16sp"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -175,23 +151,38 @@
         android:text="Today"
         android:textSize="18sp"
         android:textColor="@android:color/white"
-        android:padding="8dp" />
+        android:padding="4dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/hourly_forecast_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="133dp"
+        android:layout_height="157dp"
         android:orientation="horizontal"
         android:padding="8dp"
         android:scrollbars="horizontal" />
 
+    <!-- Daily Forecast (RecyclerView for 7 Day-Forecast) -->
+    <TextView
+        android:id="@+id/daily_forecast_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="7 Day-Forecast"
+        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        android:padding="4dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/daily_forecast_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="58dp"
+        android:layout_height="48dp"
         android:gravity="bottom"
         android:orientation="horizontal"
-        android:padding="16dp">
-
+        android:padding="12dp">
 
         <ImageView
             android:id="@+id/icon_map"
@@ -210,7 +201,6 @@
             android:layout_width="600dp"
             android:layout_height="wrap_content"
             android:layout_weight="10" />
-
 
         <ImageView
             android:id="@+id/icon_hamberger"
