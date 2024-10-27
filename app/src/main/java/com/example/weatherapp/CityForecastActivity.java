@@ -23,9 +23,9 @@ public class CityForecastActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         List<CityForecast> cityForecasts = new ArrayList<>();
-        cityForecasts.add(new CityForecast("Ha noi", "25", "30", "20", "Cloudy"));
-        cityForecasts.add(new CityForecast("TPHCM", "28", "33", "24", "Sunny"));
-        cityForecasts.add(new CityForecast("Đa nang", "27", "31", "23", "Rainy"));
+        cityForecasts.add(new CityForecast("Ha Noi", "25", "30", "20", "Cloudy"));
+        cityForecasts.add(new CityForecast("Nha Trang", "28", "33", "24", "Sunny"));
+        cityForecasts.add(new CityForecast("Da nang", "27", "31", "23", "Rainy"));
 
         cityForecastAdapter = new CityForecastAdapter(cityForecasts);
         recyclerView.setAdapter(cityForecastAdapter);

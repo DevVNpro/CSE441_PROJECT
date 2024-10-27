@@ -67,14 +67,21 @@ import java.util.TimeZone;
             hourlyForecastAdapter = new HourlyForecastAdapter(new ArrayList<>());
             recyclerView.setAdapter(hourlyForecastAdapter);
 
-            CallApi("");
+            // Retrieve the city name from the Intent
+            String cityName = getIntent().getStringExtra("city_name");
+            if (cityName != null && !cityName.isEmpty()) {
+                CallApi(cityName);
+            } else {
+                // Default to a city if none is provided
+                CallApi("tokyo");
+            }
         }
 
-        private void CallApi(String city){
+        public void CallApi(String city){
 
             // Fetch weather data
             WeatherAPI weatherAPI = new WeatherAPI(this);
-            weatherAPI.fetchWeatherData("tokyo", new WeatherAPI.WeatherDataCallback() {
+            weatherAPI.fetchWeatherData(city, new WeatherAPI.WeatherDataCallback() {
                 @Override
                 public void onSuccess(WeatherCity weatherCity) {
                     updateUI(weatherCity);

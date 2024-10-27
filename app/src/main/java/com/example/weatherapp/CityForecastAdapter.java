@@ -1,9 +1,11 @@
 package com.example.weatherapp;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -44,6 +46,7 @@ public class CityForecastAdapter extends RecyclerView.Adapter<CityForecastAdapte
         private final TextView txtHigh;
         private final TextView txtLow;
         private final TextView txtDescription;
+        private  Button button;
 
         public CityForecastViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -52,6 +55,7 @@ public class CityForecastAdapter extends RecyclerView.Adapter<CityForecastAdapte
             txtHigh = itemView.findViewById(R.id.txt_high_temp);
             txtLow = itemView.findViewById(R.id.txt_low_temp);
             txtDescription = itemView.findViewById(R.id.txt_description);
+            button = itemView.findViewById(R.id.btn_city);
         }
 
         public void bind(CityForecast city) {
@@ -60,6 +64,13 @@ public class CityForecastAdapter extends RecyclerView.Adapter<CityForecastAdapte
             txtHigh.setText("High: " + city.getHighTemp() + "°C");
             txtLow.setText("Low: " + city.getLowTemp() + "°C");
             txtDescription.setText(city.getDescription());
+            // Set OnClickListener for the button
+
+            button.setOnClickListener(v -> {
+                Intent intent = new Intent(itemView.getContext(), MainActivity.class);
+                intent.putExtra("city_name", city.getCityName());
+                itemView.getContext().startActivity(intent);
+            });
         }
     }
 }
