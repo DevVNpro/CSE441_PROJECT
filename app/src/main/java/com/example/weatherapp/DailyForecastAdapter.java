@@ -1,5 +1,7 @@
 package com.example.weatherapp;
 
+import android.annotation.SuppressLint;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,25 +13,32 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class DailyForecastAdapter extends RecyclerView.Adapter<DailyForecastAdapter.ViewHolder> {
-    private final List<DailyForecast> dailyForecastList;
+    private List<DailyForecast> dailyForecastList;
 
     public DailyForecastAdapter(List<DailyForecast> dailyForecastList) {
         this.dailyForecastList = dailyForecastList;
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    public void updateForecastList(List<DailyForecast> newForecastList) {
+        this.dailyForecastList.clear();
+        this.dailyForecastList.addAll(newForecastList);
+        notifyDataSetChanged();
+    }
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_daily_forecast, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        DailyForecast forecast = dailyForecastList.get(position);
-        holder.dayName.setText(forecast.getDayName());
-        holder.weatherIcon.setImageResource(forecast.getIconResId());
-        holder.minMaxTemperature.setText(forecast.getMinMaxTemperature());
-        holder.weatherIcon.setImageResource(forecast.getIconResId());
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        DailyForecast dailyForecast = dailyForecastList.get(position);
+
+        holder.dayNameTextView.setText(dailyForecast.getDayName());
+        holder.temperatureTextView.setText(dailyForecast.getMinMaxTemperature());
+        holder.weatherIconImageView.setImageResource(dailyForecast.getIconResId());
     }
 
     @Override
@@ -38,21 +47,15 @@ public class DailyForecastAdapter extends RecyclerView.Adapter<DailyForecastAdap
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView dayName;
-        ImageView weatherIcon;
-        TextView minMaxTemperature;
+        TextView dayNameTextView;
+        TextView temperatureTextView;
+        ImageView weatherIconImageView;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            dayName = itemView.findViewById(R.id.day_name);
-            weatherIcon = itemView.findViewById(R.id.weather_icon);
-            minMaxTemperature = itemView.findViewById(R.id.min_max_temperature);
+            dayNameTextView = itemView.findViewById(R.id.day_name);
+            temperatureTextView = itemView.findViewById(R.id.min_max_temperature);
+            weatherIconImageView = itemView.findViewById(R.id.weather_icon);
         }
     }
-    public void updateForecastList(List<DailyForecast> newForecastList) {
-        dailyForecastList.clear();
-        dailyForecastList.addAll(newForecastList);
-        notifyDataSetChanged();
-    }
-
 }

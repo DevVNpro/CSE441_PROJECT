@@ -24,13 +24,19 @@ public class HourlyForecastAdapter extends RecyclerView.Adapter<HourlyForecastAd
         this.hourlyForecastList = hourlyForecastList;
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    public void updateForecastList(List<HourlyForecast> newHourlyForecastList) {
-        Log.d("Adapter Update", "Updating forecast list in adapter.");
-        this.hourlyForecastList.clear();
-        this.hourlyForecastList.addAll(newHourlyForecastList);
-        notifyDataSetChanged();
-    }
+//    @SuppressLint("NotifyDataSetChanged")
+//    public void updateForecastList(List<HourlyForecast> newHourlyForecastList) {
+//        Log.d("Adapter Update", "Updating forecast list in adapter.");
+//        this.hourlyForecastList.clear();
+//        this.hourlyForecastList.addAll(newHourlyForecastList);
+//        notifyDataSetChanged();
+//    }
+@SuppressLint("NotifyDataSetChanged")
+public void updateForecastList(List<HourlyForecast> newForecastList) {
+    this.hourlyForecastList.clear();
+    this.hourlyForecastList.addAll(newForecastList);
+    notifyDataSetChanged();
+}
 
 
     @Override

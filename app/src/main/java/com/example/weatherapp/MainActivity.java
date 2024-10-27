@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
     TextView cityNameTextView, currentTemperatureTextView, weatherDescriptionTextView, highLowTempTextView, rainPercentageTextView, windSpeedTextView, humidityPercentageTextView, currentTimeTextView;
     ImageView weatherIconImageView, rainIconImageView, windIconImageView, humidityIconImageView;
 
+    private DailyForecastAdapter dailyForecastAdapter;
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,39 +64,38 @@ public class MainActivity extends AppCompatActivity {
         hourlyForecastAdapter = new HourlyForecastAdapter(new ArrayList<>());
         recyclerView.setAdapter(hourlyForecastAdapter);
 
-    // Thiết lập RecyclerView cho 7 Day-Forecast (dự báo theo ngày)
+
+        // Thiết lập RecyclerView cho 7 Day-Forecast (dự báo theo ngày)
+//        RecyclerView dailyForecastRecyclerView = findViewById(R.id.daily_forecast_recycler_view);
+//        LinearLayoutManager dailyLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+//        dailyForecastRecyclerView.setLayoutManager(dailyLayoutManager);
+//        dailyForecastAdapter = new DailyForecastAdapter(new ArrayList<>());
+//        dailyForecastRecyclerView.setAdapter(dailyForecastAdapter);
         RecyclerView dailyForecastRecyclerView = findViewById(R.id.daily_forecast_recycler_view);
-        LinearLayoutManager dailyLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        dailyForecastRecyclerView.setLayoutManager(dailyLayoutManager);
-        DailyForecastAdapter dailyForecastAdapter = new DailyForecastAdapter(new ArrayList<>()); // Khởi tạo với danh sách rỗng hoặc dữ liệu ban đầu
+        dailyForecastRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        dailyForecastAdapter = new DailyForecastAdapter(new ArrayList<>());
         dailyForecastRecyclerView.setAdapter(dailyForecastAdapter);
 
-        List<DailyForecast> dailyForecastList = new ArrayList<>();
-        dailyForecastAdapter = new DailyForecastAdapter(dailyForecastList);
-        recyclerView.setAdapter(dailyForecastAdapter);
 
-        // Ví dụ cập nhật dailyForecastList sau khi lấy dữ liệu từ API
-        String weatherCondition = "sunny"; // Giá trị này nên được lấy từ API
-        dailyForecastList.add(new DailyForecast("Mon", getWeatherIcon(weatherCondition), "18°C", "25°C"));
-        dailyForecastAdapter.updateForecastList(dailyForecastList);
+
 
     }
-    // Thêm phương thức getWeatherIcon trong MainActivity
-    private int getWeatherIcon(String weatherCondition) {
-        switch (weatherCondition.toLowerCase()) {
-            case "rainy":
-                return R.drawable.rainy;
-            case "sunny":
-                return R.drawable.sunny;
-            case "storm":
-                return R.drawable.storm;
-            case "windy":
-                return R.drawable.windy;
-            default:
-                return R.drawable.default_icon;
+
+    private String getDayOfWeek(long timestamp) {
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE", Locale.getDefault());
+        Date date = new Date(timestamp * 1000); // Chuyển đổi timestamp từ giây sang mili giây
+        return sdf.format(date);
+    }
+
+    private int getIconResourceId(String iconCode) {
+        switch (iconCode) {
+            case "01d": return R.drawable.sunny;
+            case "02d": return R.drawable.windy;
+            case "03d": return R.drawable.rainy;
+            case "04d": return R.drawable.storm;
+            default: return R.drawable.default_icon;
         }
     }
-
 
     public void GetData(View view) {
         String apiKey = "96b20cc6216333159a8e894ba26d0eea";
@@ -124,22 +125,14 @@ public class MainActivity extends AppCompatActivity {
                             JSONObject weather = weatherArray.getJSONObject(0);
                             JSONObject wind = firstForecast.getJSONObject("wind");
 
-
+                            JSONObject jsonResponse = new JSONObject(String.valueOf(response)); // "response" là chuỗi JSON từ API
+                            JSONArray dailyArray = jsonResponse.getJSONArray("list"); // Lấy danh sách "list" từ JSON
 
                             // Nhiệt độ hiện tại
                             double temp = main.getDouble("temp") - 273.15; // Chuyển đổi từ Kelvin sang Celsius
                             @SuppressLint("DefaultLocale") String formattedTemp = String.format("%.1f°", temp);
                             currentTemperatureTextView.setText(formattedTemp);
 
-                            // Mô tả thời tiết
-                            String description = weather.getString("description");
-                            weatherDescriptionTextView.setText(description);
-
-                            // Cập nhật nhiệt độ cao và thấp
-                            double tempMin = main.getDouble("temp_min") - 273.15;
-                            double tempMax = main.getDouble("temp_max") - 273.15;
-                            @SuppressLint("DefaultLocale") String highLowTemp = "H:" + String.format("%.1f", tempMax) + "° L:" + String.format("%.1f", tempMin) + "°";
-                            highLowTempTextView.setText(highLowTemp);
 
                             // Lượng mưa và độ ẩm
                             if (firstForecast.has("rain")) {
@@ -164,27 +157,35 @@ public class MainActivity extends AppCompatActivity {
 
                             // Khởi tạo danh sách dự báo theo giờ
                             List<HourlyForecast> hourlyForecastList = new ArrayList<>();
-
                             for (int i = 0; i < 12; i++) { // Lấy liên tiếp 12 mục dự báo cách nhau 1 giờ
-                                // Lấy dự báo tại vị trí i từ API
                                 JSONObject forecast = list.getJSONObject(i);
-
-                                // Lấy nhiệt độ và mô tả thời tiết
-                                double tempHourly = forecast.getJSONObject("main").getDouble("temp") - 273.15; // Đổi từ Kelvin sang Celsius
+                                double tempHourly = forecast.getJSONObject("main").getDouble("temp") - 273.15;
                                 String hourlyDescription = forecast.getJSONArray("weather").getJSONObject(0).getString("description");
-
-                                // Tính toán timestamp: giờ đầu tiên là giờ hiện tại, các giờ tiếp theo cách nhau 1 giờ
-                                long timestamp = currentTimestamp + (i * 3600); // Cộng thêm mỗi giờ (3600 giây)
-
-                                // Thêm vào danh sách dự báo
+                                long timestamp = forecast.getLong("dt");
                                 hourlyForecastList.add(new HourlyForecast(String.format("%.1f°", tempHourly), hourlyDescription, timestamp));
                             }
-
-                            // Cập nhật adapter với danh sách mới
                             hourlyForecastAdapter.updateForecastList(hourlyForecastList);
-
-                            // Cập nhật adapter cho Today forecast
                             hourlyForecastAdapter.notifyDataSetChanged();
+
+                            //7dayforecast
+                            List<DailyForecast> dailyForecastList = new ArrayList<>();
+                            for (int i = 1; i < dailyArray.length(); i++) { // Bắt đầu từ i = 1 để lấy dữ liệu từ ngày hôm sau
+                                JSONObject dailyData = dailyArray.getJSONObject(i);
+                                long timestamp = dailyData.getLong("dt");
+
+                                // Kiểm tra temp để tránh lỗi
+                                if (dailyData.has("temp")) {
+                                    JSONObject tempData = dailyData.getJSONObject("temp");
+                                    double tempMax = tempData.getDouble("max") - 273.15;
+                                    double tempMin = tempData.getDouble("min") - 273.15;
+
+                                    String dayName = getDayOfWeek(timestamp);
+                                    int iconResId = getIconResourceId(dailyData.getJSONArray("weather").getJSONObject(0).getString("icon"));
+
+                                    dailyForecastList.add(new DailyForecast(dayName, iconResId, String.format("%.1f", tempMin), String.format("%.1f", tempMax)));
+                                }
+                            }
+                            dailyForecastAdapter.updateForecastList(dailyForecastList);
 
 
                             // Lấy múi giờ
@@ -199,6 +200,8 @@ public class MainActivity extends AppCompatActivity {
                             sdf.setTimeZone(TimeZone.getTimeZone("GMT")); // Đặt múi giờ về GMT để định dạng chính xác
                             String currentTime = sdf.format(new Date(localTimestamp));
                             currentTimeTextView.setText(currentTime);
+
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Toast.makeText(MainActivity.this, "Error parsing weather data", Toast.LENGTH_SHORT).show();

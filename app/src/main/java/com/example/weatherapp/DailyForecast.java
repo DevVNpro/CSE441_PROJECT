@@ -16,7 +16,14 @@ public class DailyForecast {
         this.minTemp = minTemp;
         this.maxTemp = maxTemp;
     }
-    private int getIconResourceId(String iconCode) {
+
+public String getDayOfWeek(long timestamp) {
+    SimpleDateFormat sdf = new SimpleDateFormat("EEE", Locale.getDefault());
+    Date date = new Date(timestamp * 1000); // Chuyển timestamp từ giây sang mili giây
+    return sdf.format(date);
+}
+
+    public int getIconResourceId(String iconCode) {
         switch (iconCode) {
             case "01d": return R.drawable.sunny;
             case "02d": return R.drawable.windy;
@@ -26,12 +33,6 @@ public class DailyForecast {
         }
     }
 
-
-    private String getDayOfWeek(long timestamp) {
-        SimpleDateFormat sdf = new SimpleDateFormat("EEE", Locale.getDefault());
-        Date date = new Date(timestamp * 1000);
-        return sdf.format(date);
-    }
 
     public String getDayName() {
         return dayName;
