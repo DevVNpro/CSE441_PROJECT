@@ -1,0 +1,27 @@
+<!-- res/drawable/bg_sunny.xml -->
+<!-- res/drawable/bg_sunny.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Background gradient -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:startColor="#FFDE7D"
+                android:centerColor="#FFD700"
+                android:endColor="#FFAB4F"
+                android:angle="270"/>
+        </shape>
+    </item>
+
+    <!-- Họa tiết nắng -->
+    <item>
+        <shape android:shape="oval">
+            <size android:width="500dp" android:height="500dp"/>
+            <gradient
+                android:startColor="#FFE57F"
+                android:endColor="#FFCC33"
+                android:gradientRadius="250dp"
+                android:type="radial" />
+        </shape>
+    </item>
+</layer-list>
+

@@ -1,5 +1,3 @@
-
-
 package com.example.weatherapp;
 
 import android.annotation.SuppressLint;
@@ -37,9 +35,12 @@ import java.util.TimeZone;
     public class MainActivity extends AppCompatActivity {
 
         private HourlyForecastAdapter hourlyForecastAdapter;
-       private DailyForecastAdapter dailyForecastAdapter;
+        private DailyForecastAdapter dailyForecastAdapter;
         private TextView cityNameTextView, currentTemperatureTextView, weatherDescriptionTextView, highLowTempTextView, rainPercentageTextView, windSpeedTextView, humidityPercentageTextView, currentTimeTextView;
         private ImageView weatherIconImageView, rainIconImageView, windIconImageView, humidityIconImageView;
+
+        private static final int REQUEST_LOCATION_PERMISSION = 1;
+        private static final int REQUEST_CHECK_SETTINGS = 2;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {

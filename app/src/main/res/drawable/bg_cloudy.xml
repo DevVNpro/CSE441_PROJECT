@@ -1,0 +1,29 @@
+<!-- res/drawable/bg_cloudy.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Background gradient -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:startColor="#3C4E65"
+                android:centerColor="#2A3B50"
+                android:endColor="#1E2A38"
+                android:angle="270"/>
+        </shape>
+    </item>
+
+    <!-- Đám mây 1 -->
+    <item android:left="40dp" android:top="50dp">
+        <shape android:shape="oval">
+            <size android:width="150dp" android:height="100dp"/>
+            <solid android:color="#FFFFFF"/>
+        </shape>
+    </item>
+
+    <!-- Đám mây 2 -->
+    <item android:left="180dp" android:top="60dp">
+        <shape android:shape="oval">
+            <size android:width="100dp" android:height="70dp"/>
+            <solid android:color="#FFFFFF"/>
+        </shape>
+    </item>
+</layer-list>

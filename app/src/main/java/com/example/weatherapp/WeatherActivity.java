@@ -30,12 +30,12 @@ public class WeatherActivity extends AppCompatActivity {
     private FusedLocationProviderClient fusedLocationProviderClient;
     private TextView tvLocation, tvTemperature;
     private Button btnFetchWeather;
-    private final String API_KEY = "your_api_key_here"; // OpenWeatherMap API key
+    private final String API_KEY = "ca0cc331f07186dbfb8156dbecaa91db"; // OpenWeatherMap API key
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.weather_activity);
+        setContentView(R.layout.activity_weather);
 
         tvLocation = findViewById(R.id.tvLocation);
         tvTemperature = findViewById(R.id.tvTemperature);

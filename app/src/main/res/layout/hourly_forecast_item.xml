@@ -6,6 +6,7 @@
     android:gravity="center"
     android:layout_marginStart="5dp"
     android:layout_marginEnd="5dp"
+    android:id="@+id/layoutBackground"
     android:paddingTop="8dp">
 
     <TextView

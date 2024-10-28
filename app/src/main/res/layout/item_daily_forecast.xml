@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:gravity="center"
+    android:id="@+id/layoutBackground"
     android:padding="8dp">
 
     <!-- TextView cho tên ngày -->
