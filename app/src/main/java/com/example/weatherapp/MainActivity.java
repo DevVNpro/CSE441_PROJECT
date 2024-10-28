@@ -37,7 +37,7 @@ import java.util.TimeZone;
     public class MainActivity extends AppCompatActivity {
 
         private HourlyForecastAdapter hourlyForecastAdapter;
-//        private DailyForecastAdapter dailyForecastAdapter;
+       private DailyForecastAdapter dailyForecastAdapter;
         private TextView cityNameTextView, currentTemperatureTextView, weatherDescriptionTextView, highLowTempTextView, rainPercentageTextView, windSpeedTextView, humidityPercentageTextView, currentTimeTextView;
         private ImageView weatherIconImageView, rainIconImageView, windIconImageView, humidityIconImageView;
 
@@ -63,11 +63,11 @@ import java.util.TimeZone;
             recyclerView.setAdapter(hourlyForecastAdapter);
 
 
-            // Thiết lập RecyclerView cho 7 Day-Forecast (dự báo theo ngày)
+/*            // Thiết lập RecyclerView cho 7 Day-Forecast (dự báo theo ngày)
             RecyclerView dailyForecastRecyclerView = findViewById(R.id.daily_forecast_recycler_view);
             dailyForecastRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-            DailyForecastAdapter dailyForecastAdapter = new DailyForecastAdapter(new ArrayList<>());
-            dailyForecastRecyclerView.setAdapter(dailyForecastAdapter);
+             dailyForecastAdapter = new DailyForecastAdapter(new ArrayList<>());
+            dailyForecastRecyclerView.setAdapter(dailyForecastAdapter);*/
 
 
             // Retrieve the city name from the Intent
@@ -118,7 +118,7 @@ import java.util.TimeZone;
         private void updateUI(WeatherCity weatherCity) {
             cityNameTextView.setText(weatherCity.getCity());
             currentTemperatureTextView.setText(String.format("%.1f°C", weatherCity.getCurrentTemperature()));
-            weatherDescriptionTextView.setText(weatherCity.getWeatherDescription());
+      //      weatherDescriptionTextView.setText(weatherCity.getWeatherDescription());
             highLowTempTextView.setText(String.format("H: %.1f° / L: %.1f°", weatherCity.getMaxTemperature(), weatherCity.getMinTemperature()));
             rainPercentageTextView.setText(String.format("Rain: %.1f%%", weatherCity.getRainfall()));
             windSpeedTextView.setText(String.format("Wind: %.1f m/s", weatherCity.getWindSpeed()));
