@@ -1,6 +1,9 @@
 package com.example.weatherapp;
 
 import android.content.Context;
+
+import androidx.appcompat.app.WindowDecorActionBar;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -42,8 +45,8 @@ public class WeatherAPI {
     }
 
     private WeatherCity parseWeatherData(JSONObject response, String city) throws JSONException {
-        // Parse current temperature and description
-       // JSONObject cityInfo = response.getJSONObject("city");
+//         Parse current temperature and description
+//        JSONObject cityInfo = response.getJSONObject("city");
         JSONArray forecastList = response.getJSONArray("list");
 
         JSONObject currentForecast = forecastList.getJSONObject(0);
@@ -64,6 +67,20 @@ public class WeatherAPI {
         weatherCity.setWindSpeed(windSpeed);
         weatherCity.setWeatherDescription(description);
 
+
+
+
+
+        // Lấy dự báo thời tiết hiện tại
+        JSONArray list = response.getJSONArray("list");
+        JSONObject firstForecast = list.getJSONObject(0);
+        JSONObject main = firstForecast.getJSONObject("main");
+        JSONArray weatherArray = firstForecast.getJSONArray("weather");
+        JSONObject weather = weatherArray.getJSONObject(0);
+        JSONObject wind = firstForecast.getJSONObject("wind");
+
+        JSONObject jsonResponse = new JSONObject(String.valueOf(response)); // "response" là chuỗi JSON từ API
+        JSONArray dailyArray = jsonResponse.getJSONArray("list"); // Lấy danh sách "list" từ JSON
 
         // Parse hourly forecast data for 12 intervals (36 hours)
         List<HourlyForecast> hourlyForecasts = new ArrayList<>();

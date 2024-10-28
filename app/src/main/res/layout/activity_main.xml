@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--Thuc update giao dien home-->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,88 +6,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/background_gradient"
     android:padding="16dp">
 
-    <!-- Current Weather Icon and Description -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
-        tools:ignore="UseCompoundDrawables">
-
-        <ImageView
-            android:id="@+id/weather_icon"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/cloudy_sunny" />
-
-        <TextView
-            android:id="@+id/weather_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#BF3535"
-            android:backgroundTint="#10FFFFFF"
-            android:foregroundTint="#FFF7F7"
-            android:gravity="center_horizontal"
-            android:text="Mostly Cloudy"
-            android:textColor="@color/design_default_color_on_secondary"
-            android:textSize="20sp" />
-    </LinearLayout>
 
     <!-- Current Temperature and Time -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_height="194dp"
         android:gravity="center_horizontal"
-        android:paddingTop="16dp">
+        android:orientation="vertical"
+        android:paddingTop="10dp">
 
         <TextView
             android:id="@+id/city_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#BF3535"
-            android:backgroundTint="#10FFFFFF"
-            android:foregroundTint="#FFF7F7"
             android:gravity="center_horizontal"
             android:paddingBottom="8dp"
             android:text="Location"
-            android:textColor="@color/design_default_color_on_secondary"
+            android:textColor="@android:color/white"
             android:textSize="22sp" />
 
         <TextView
             android:id="@+id/current_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#BF3535"
-            android:backgroundTint="#10FFFFFF"
-            android:foregroundTint="#FFF7F7"
             android:text="Mon June 17 | 10:00 AM"
-            android:textColor="@color/design_default_color_on_secondary"
+            android:textColor="@android:color/white"
             android:textSize="16sp" />
 
         <TextView
             android:id="@+id/current_temperature"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#BF3535"
-            android:backgroundTint="#10FFFFFF"
-            android:foregroundTint="#FFF7F7"
+            android:layout_height="83dp"
             android:text="25°"
-            android:textColor="@color/design_default_color_on_secondary"
+            android:textColor="@android:color/white"
             android:textSize="72sp" />
 
         <TextView
             android:id="@+id/high_low_temperatures"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#BF3535"
-            android:backgroundTint="#10FFFFFF"
-            android:foregroundTint="#FFF7F7"
             android:paddingBottom="16dp"
             android:text="H:27° L:18°"
-            android:textColor="@color/design_default_color_on_secondary"
+            android:textColor="@android:color/white"
             android:textSize="18sp" />
     </LinearLayout>
 
@@ -96,16 +58,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:gravity="center_horizontal"
-        android:paddingBottom="16dp">
+        android:orientation="horizontal"
+        android:paddingBottom="2dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#BF3535"
-            android:backgroundTint="#10FFFFFF"
-            android:foregroundTint="#FFF7F7"
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:padding="8dp"
@@ -121,19 +80,16 @@
                 android:id="@+id/rain_percentage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#BF3535"
-                android:backgroundTint="#10FFFFFF"
-                android:foregroundTint="#FFF7F7"
                 android:text="22%"
-                android:textColor="@color/design_default_color_on_secondary"
+                android:textColor="@android:color/white"
                 android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:gravity="center_horizontal"
+            android:orientation="vertical"
             android:padding="8dp">
 
             <ImageView
@@ -146,20 +102,28 @@
                 android:id="@+id/wind_speed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#BF3535"
-                android:backgroundTint="#10FFFFFF"
-                android:foregroundTint="#FFF7F7"
                 android:text="12 km/h"
-                android:textColor="@color/design_default_color_on_secondary"
+                android:textColor="@android:color/white"
                 android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/get_weather_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="2dp"
+                android:backgroundTint="@color/orange"
+                android:onClick="GetData"
+                android:padding="8dp"
+                android:text="Get Weather" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:gravity="center_horizontal"
+            android:orientation="vertical"
             android:padding="8dp"
             tools:ignore="UseCompoundDrawables">
 
@@ -174,7 +138,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="18%"
-                android:textColor="@color/design_default_color_on_secondary"
+                android:textColor="@android:color/white"
                 android:textSize="16sp" />
         </LinearLayout>
     </LinearLayout>
@@ -185,26 +149,41 @@
         android:id="@+id/hourly_forecast_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="8dp"
         android:text="Today"
-        android:textColor="@color/design_default_color_on_secondary"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        android:padding="4dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/hourly_forecast_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="133dp"
+        android:layout_height="157dp"
         android:orientation="horizontal"
         android:padding="8dp"
         android:scrollbars="horizontal" />
 
+    <!-- Daily Forecast (RecyclerView for 7 Day-Forecast) -->
+    <TextView
+        android:id="@+id/daily_forecast_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="7 Day-Forecast"
+        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        android:padding="4dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/daily_forecast_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        android:padding="8dp" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="58dp"
+        android:layout_height="48dp"
         android:gravity="bottom"
         android:orientation="horizontal"
-        android:padding="16dp">
-
+        android:padding="12dp">
 
         <ImageView
             android:id="@+id/icon_map"
@@ -224,7 +203,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="10" />
 
-
         <ImageView
             android:id="@+id/icon_hamberger"
             android:layout_width="wrap_content"
@@ -234,7 +212,6 @@
             android:src="@drawable/hamberger"
             app:tint="#FFFFFF" />
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -248,6 +225,5 @@
             android:onClick="OnClickCityActivity"
             android:textColorLink="#66B369" />
     </LinearLayout>
-
 </LinearLayout>
 

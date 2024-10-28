@@ -36,12 +36,10 @@ import java.util.TimeZone;
 
     public class MainActivity extends AppCompatActivity {
 
-        private RecyclerView recyclerView;
         private HourlyForecastAdapter hourlyForecastAdapter;
-
-        private TextView cityNameTextView, currentTemperatureTextView, weatherDescriptionTextView,
-                highLowTempTextView, rainPercentageTextView, windSpeedTextView, humidityPercentageTextView, currentTimeTextView;
-        private ImageView weatherIconImageView;
+//        private DailyForecastAdapter dailyForecastAdapter;
+        private TextView cityNameTextView, currentTemperatureTextView, weatherDescriptionTextView, highLowTempTextView, rainPercentageTextView, windSpeedTextView, humidityPercentageTextView, currentTimeTextView;
+        private ImageView weatherIconImageView, rainIconImageView, windIconImageView, humidityIconImageView;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -51,21 +49,26 @@ import java.util.TimeZone;
             // Initialize UI components
             cityNameTextView = findViewById(R.id.city_name);
             currentTemperatureTextView = findViewById(R.id.current_temperature);
-            weatherDescriptionTextView = findViewById(R.id.weather_description);
             highLowTempTextView = findViewById(R.id.high_low_temperatures);
             rainPercentageTextView = findViewById(R.id.rain_percentage);
             windSpeedTextView = findViewById(R.id.wind_speed);
             humidityPercentageTextView = findViewById(R.id.humidity_percentage);
             currentTimeTextView = findViewById(R.id.current_time);
-            weatherIconImageView = findViewById(R.id.weather_icon);
 
-            // Set up RecyclerView
-            recyclerView = findViewById(R.id.hourly_forecast_recycler_view);
+            // Thiết lập RecyclerView cho Today (dự báo theo giờ)
+            RecyclerView recyclerView = findViewById(R.id.hourly_forecast_recycler_view);
             LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
             recyclerView.setLayoutManager(layoutManager);
-
             hourlyForecastAdapter = new HourlyForecastAdapter(new ArrayList<>());
             recyclerView.setAdapter(hourlyForecastAdapter);
+
+
+            // Thiết lập RecyclerView cho 7 Day-Forecast (dự báo theo ngày)
+            RecyclerView dailyForecastRecyclerView = findViewById(R.id.daily_forecast_recycler_view);
+            dailyForecastRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+            DailyForecastAdapter dailyForecastAdapter = new DailyForecastAdapter(new ArrayList<>());
+            dailyForecastRecyclerView.setAdapter(dailyForecastAdapter);
+
 
             // Retrieve the city name from the Intent
             String cityName = getIntent().getStringExtra("city_name");
@@ -77,6 +80,23 @@ import java.util.TimeZone;
             }
         }
 
+
+
+        private String getDayOfWeek(long timestamp) {
+            SimpleDateFormat sdf = new SimpleDateFormat("EEE", Locale.getDefault());
+            Date date = new Date(timestamp * 1000); // Chuyển đổi timestamp từ giây sang mili giây
+            return sdf.format(date);
+        }
+
+        private int getIconResourceId(String iconCode) {
+            switch (iconCode) {
+                case "01d": return R.drawable.sunny;
+                case "02d": return R.drawable.windy;
+                case "03d": return R.drawable.rainy;
+                case "04d": return R.drawable.storm;
+                default: return R.drawable.sunny; // update icon after 2 days
+            }
+        }
         public void CallApi(String city){
 
             // Fetch weather data
