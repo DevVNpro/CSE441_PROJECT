@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Thiết lập RecyclerView cho 7 Day-Forecast (dự báo theo ngày)
         RecyclerView dailyForecastRecyclerView = findViewById(R.id.daily_forecast_recycler_view);
-        dailyForecastRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        dailyForecastRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         dailyForecastAdapter = new DailyForecastAdapter(new ArrayList<>());
         dailyForecastRecyclerView.setAdapter(dailyForecastAdapter);
 
@@ -231,27 +231,26 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("StaticFieldLeak")
     private void processDailyForecastData(JSONArray dailyArray) {
         new AsyncTask<JSONArray, Void, List<DailyForecast>>() {
-            @SuppressLint({"StaticFieldLeak", "DefaultLocale"})
+            @SuppressLint({"DefaultLocale"})
             @Override
             protected List<DailyForecast> doInBackground(JSONArray... params) {
                 JSONArray dailyArray = params[0];
                 List<DailyForecast> dailyForecastList = new ArrayList<>();
 
                 try {
-                    for (int i = 1; i < dailyArray.length(); i++) {
+                    for (int i = 0; i < dailyArray.length(); i += 8) { // Lấy dữ liệu mỗi 8 mục dự báo hàng giờ (~1 ngày)
                         JSONObject dailyData = dailyArray.getJSONObject(i);
                         long timestamp = dailyData.getLong("dt");
 
-                        if (dailyData.has("temp")) {
-                            JSONObject tempData = dailyData.getJSONObject("temp");
-                            double tempMax = tempData.getDouble("max") - 273.15;
-                            double tempMin = tempData.getDouble("min") - 273.15;
+                        JSONObject mainData = dailyData.getJSONObject("main");
+                        double tempMax = mainData.getDouble("temp_max") - 273.15;
+                        double tempMin = mainData.getDouble("temp_min") - 273.15;
 
-                            String dayName = getDayOfWeek(timestamp);
-                            int iconResId = getIconResourceId(dailyData.getJSONArray("weather").getJSONObject(0).getString("icon"));
+                        String dayName = getDayOfWeek(timestamp);
+                        String iconCode = dailyData.getJSONArray("weather").getJSONObject(0).getString("icon");
+                        int iconResId = getIconResourceId(iconCode);
 
-                            dailyForecastList.add(new DailyForecast(dayName, iconResId, String.format("%.1f", tempMin), String.format("%.1f", tempMax)));
-                        }
+                        dailyForecastList.add(new DailyForecast(dayName, iconResId, String.format("%.1f", tempMin), String.format("%.1f", tempMax)));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -259,7 +258,6 @@ public class MainActivity extends AppCompatActivity {
                 return dailyForecastList;
             }
 
-            @SuppressLint("NotifyDataSetChanged")
             @Override
             protected void onPostExecute(List<DailyForecast> dailyForecastList) {
                 dailyForecastAdapter.updateForecastList(dailyForecastList);
@@ -267,6 +265,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }.execute(dailyArray);
     }
+
 
 
 }

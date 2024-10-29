@@ -4,31 +4,37 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:gravity="center"
     android:padding="8dp">
 
     <!-- TextView cho tên ngày -->
     <TextView
         android:id="@+id/day_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Mon"
+        android:layout_weight="1"
+        android:text="Today"
         android:textSize="16sp"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/white"
+        android:gravity="center_vertical"/>
 
     <!-- ImageView cho icon thời tiết -->
     <ImageView
         android:id="@+id/weather_icon"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:src="@drawable/sunny" />
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/sunny"
+        android:contentDescription="Weather icon" />
 
     <!-- TextView cho nhiệt độ min/max -->
     <TextView
         android:id="@+id/min_max_temperature"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="H:28° L:18°"
+        android:layout_weight="1"
+        android:text="25°C - 28°C"
         android:textSize="16sp"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/white"
+        android:gravity="end|center_vertical" />
 </LinearLayout>

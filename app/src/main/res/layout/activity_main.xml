@@ -175,7 +175,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/daily_forecast_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="125dp"
+        android:layout_height="155dp"
         android:padding="8dp" />
 
     <LinearLayout
