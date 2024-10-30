@@ -13,14 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class DailyForecastAdapter extends RecyclerView.Adapter<DailyForecastAdapter.ViewHolder> {
-    private List<DailyForecast> dailyForecastList;
+    private List<SimpleForecast> dailyForecastList;
 
-    public DailyForecastAdapter(List<DailyForecast> dailyForecastList) {
+    public DailyForecastAdapter(List<SimpleForecast> dailyForecastList) {
         this.dailyForecastList = dailyForecastList;
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    public void updateForecastList(List<DailyForecast> newForecastList) {
+    public void updateForecastList(List<SimpleForecast> newForecastList) {
         this.dailyForecastList.clear();
         this.dailyForecastList.addAll(newForecastList);
         notifyDataSetChanged();
@@ -34,11 +34,11 @@ public class DailyForecastAdapter extends RecyclerView.Adapter<DailyForecastAdap
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        DailyForecast dailyForecast = dailyForecastList.get(position);
+        SimpleForecast dailyForecast = dailyForecastList.get(position);
 
-        holder.dayNameTextView.setText(dailyForecast.getDayName());
-        holder.temperatureTextView.setText(dailyForecast.getMinMaxTemperature());
-        holder.weatherIconImageView.setImageResource(dailyForecast.getIconResId());
+        holder.dayNameTextView.setText(dailyForecast.getDay());
+        holder.temperatureTextView.setText(dailyForecast.getDescription());
+        //holder.weatherIconImageView.setImageResource(dailyForecast.get());
     }
 
     @Override

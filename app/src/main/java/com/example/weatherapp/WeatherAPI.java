@@ -70,7 +70,7 @@ public class WeatherAPI {
 
 
 
-
+/*
         // Lấy dự báo thời tiết hiện tại
         JSONArray list = response.getJSONArray("list");
         JSONObject firstForecast = list.getJSONObject(0);
@@ -80,7 +80,7 @@ public class WeatherAPI {
         JSONObject wind = firstForecast.getJSONObject("wind");
 
         JSONObject jsonResponse = new JSONObject(String.valueOf(response)); // "response" là chuỗi JSON từ API
-        JSONArray dailyArray = jsonResponse.getJSONArray("list"); // Lấy danh sách "list" từ JSON
+        JSONArray dailyArray = jsonResponse.getJSONArray("list"); // Lấy danh sách "list" từ JSON*/
 
         // Parse hourly forecast data for 12 intervals (36 hours)
         List<HourlyForecast> hourlyForecasts = new ArrayList<>();
@@ -91,6 +91,25 @@ public class WeatherAPI {
             hourlyForecasts.add(new HourlyForecast(String.format("%.1f°", tempHourly), hourlyDescription, i * 3));
         }
         weatherCity.setHourlyForecasts(hourlyForecasts);
+
+        //daily forecase 7 day
+        List<SimpleForecast> dailyForecasts = new ArrayList<>();
+
+        for (int i = 0; i < forecastList.length(); i++) {
+            JSONObject dailyForecast = forecastList.getJSONObject(i);
+            String day1 = "Day " + (i + 1); // You can format the day more elegantly if needed
+            String description1 = dailyForecast.getJSONArray("weather").getJSONObject(0).getString("description");
+            float minTemp1 = (float) dailyForecast.getJSONObject("temp").getDouble("min");
+            float maxTemp1 = (float) dailyForecast.getJSONObject("temp").getDouble("max");
+
+            // Create SimpleForecast object and add to the list
+            SimpleForecast forecast = new SimpleForecast(day1, description1, minTemp1, maxTemp1);
+            dailyForecasts.add(forecast);
+        }
+
+        weatherCity.setDailyForecasts(dailyForecasts);
+
+
 
         return weatherCity;
     }
