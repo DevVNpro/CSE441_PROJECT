@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,7 +34,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 
     public class MainActivity extends AppCompatActivity {
-
+        private LinearLayout layoutBackground;
         private HourlyForecastAdapter hourlyForecastAdapter;
         private DailyForecastAdapter dailyForecastAdapter;
         private TextView cityNameTextView, currentTemperatureTextView, weatherDescriptionTextView, highLowTempTextView, rainPercentageTextView, windSpeedTextView, humidityPercentageTextView, currentTimeTextView;
@@ -55,6 +56,7 @@ import java.util.TimeZone;
             windSpeedTextView = findViewById(R.id.wind_speed);
             humidityPercentageTextView = findViewById(R.id.humidity_percentage);
             currentTimeTextView = findViewById(R.id.current_time);
+            layoutBackground = findViewById(R.id.layoutBackground);
 
             // Thiết lập RecyclerView cho Today (dự báo theo giờ)
             RecyclerView recyclerView = findViewById(R.id.hourly_forecast_recycler_view);
