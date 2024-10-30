@@ -40,11 +40,11 @@ public class BackgroundChangeActivity extends AppCompatActivity {
         int backgroundResource;
 
         // Kiểm tra mô tả thời tiết và đặt hình nền tương ứng
-        if (weatherDescription.contains("clear")) {
+        if (weatherDescription.contains("Sunny")) {
             backgroundResource = R.drawable.bg_sunny;
-        } else if (weatherDescription.contains("rain")) {
+        } else if (weatherDescription.contains("Rainy")) {
             backgroundResource = R.drawable.bg_rainy;
-        } else if (weatherDescription.contains("cloud")) {
+        } else if (weatherDescription.contains("Cloudy")) {
             backgroundResource = R.drawable.bg_cloudy;
         } else {
             backgroundResource = R.drawable.bg_default;

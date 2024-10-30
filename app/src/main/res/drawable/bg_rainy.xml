@@ -1,23 +1,10 @@
-<!-- res/drawable/bg_rainy.xml -->
-<!-- res/drawable/bg_rainy.xml -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Background gradient -->
     <item>
         <shape android:shape="rectangle">
             <gradient
-                android:startColor="#4A6075"
-                android:centerColor="#3C4E65"
-                android:endColor="#2E3A47"
-                android:angle="270"/>
-        </shape>
-    </item>
-
-    <!-- Các đường nét mưa -->
-    <item>
-        <shape android:shape="rectangle">
-            <size android:width="5dp" android:height="100dp"/>
-            <solid android:color="#A0B6CC"/>
+                android:startColor="#5a7fa7"
+                android:endColor="#324a72"
+                android:angle="270" />
         </shape>
     </item>
 </layer-list>
-
