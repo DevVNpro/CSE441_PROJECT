@@ -88,12 +88,12 @@ public class MainActivity extends AppCompatActivity {
             case "02d": return R.drawable.windy;
             case "03d": return R.drawable.rainy;
             case "04d": return R.drawable.storm;
-            default: return R.drawable.default_icon;
+            default: return R.drawable.sunny;
         }
     }
 
     public void GetData(View view) {
-        String apiKey = "96b20cc6216333159a8e894ba26d0eea";
+        String apiKey = "5b8ad1559647dc46cdfeff54a8a5c8c3";
         String city = "Ha Noi"; // Thành phố
         String url = "https://api.openweathermap.org/data/2.5/forecast?q=" + city.replace(" ", "%20") + "&appid=" + apiKey;
 
@@ -150,9 +150,10 @@ public class MainActivity extends AppCompatActivity {
                             // Lấy giờ hiện tại (Unix timestamp tính theo giây)
                             long currentTimestamp = System.currentTimeMillis() / 1000L;
 
+
                             // Khởi tạo danh sách dự báo theo giờ
                             List<HourlyForecast> hourlyForecastList = new ArrayList<>();
-                            for (int i = 0; i < 12; i++) { // Lấy liên tiếp 12 mục dự báo cách nhau 1 giờ
+                            for (int i = 0; i < 12; i++) { // Lấy liên tiếp 12 mục dự báo cách nhau 3 giờ
                                 JSONObject forecast = list.getJSONObject(i);
                                 double tempHourly = forecast.getJSONObject("main").getDouble("temp") - 273.15;
                                 String hourlyDescription = forecast.getJSONArray("weather").getJSONObject(0).getString("description");
@@ -162,35 +163,8 @@ public class MainActivity extends AppCompatActivity {
                             hourlyForecastAdapter.updateForecastList(hourlyForecastList);
                             hourlyForecastAdapter.notifyDataSetChanged();
 
-//                            //7dayforecast
-//
-//                            List<DailyForecast> dailyForecastList = new ArrayList<>();
-//                            for (int i = 1; i < dailyArray.length(); i++) { // Bắt đầu từ i = 1 để lấy dữ liệu từ ngày hôm sau
-//                                JSONObject dailyData = dailyArray.getJSONObject(i);
-//                                long timestamp = dailyData.getLong("dt");
-//
-//                                // Kiểm tra temp để tránh lỗi
-//                                if (dailyData.has("temp")) {
-//                                    JSONObject tempData = dailyData.getJSONObject("temp");
-//                                    double tempMax = tempData.getDouble("max") - 273.15;
-//                                    double tempMin = tempData.getDouble("min") - 273.15;
-//
-//                                    String dayName = getDayOfWeek(timestamp);
-//                                    int iconResId = getIconResourceId(dailyData.getJSONArray("weather").getJSONObject(0).getString("icon"));
-//
-//                                    dailyForecastList.add(new DailyForecast(dayName, iconResId, String.format("%.1f", tempMin), String.format("%.1f", tempMax)));
-//                                }
-//                            }
-//                            // In ra để kiểm tra xem danh sách dailyForecastList có dữ liệu không
-//                            for (DailyForecast forecast : dailyForecastList) {
-//                                Log.d("7DayForecast", "Day: " + forecast.getDayName() +
-//                                        ", Max Temp: " + forecast.getMaxTemp() +
-//                                        ", Min Temp: " + forecast.getMinTemp());
-//                            }
-//                            dailyForecastAdapter.updateForecastList(dailyForecastList);
-//                            dailyForecastAdapter.notifyDataSetChanged();
-                            // Dữ liệu cho dự báo 7 ngày
 
+                            // gọi 7 dayforecast
                             processDailyForecastData(dailyArray);
 
                             // Lấy múi giờ
@@ -228,6 +202,8 @@ public class MainActivity extends AppCompatActivity {
 
         queue.add(request);
     }
+
+
     @SuppressLint("StaticFieldLeak")
     private void processDailyForecastData(JSONArray dailyArray) {
         new AsyncTask<JSONArray, Void, List<DailyForecast>>() {
@@ -238,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
                 List<DailyForecast> dailyForecastList = new ArrayList<>();
 
                 try {
-                    for (int i = 0; i < dailyArray.length(); i += 8) { // Lấy dữ liệu mỗi 8 mục dự báo hàng giờ (~1 ngày)
+                    for (int i = 0; i < dailyArray.length(); i += 7) {
                         JSONObject dailyData = dailyArray.getJSONObject(i);
                         long timestamp = dailyData.getLong("dt");
 
@@ -265,7 +241,5 @@ public class MainActivity extends AppCompatActivity {
             }
         }.execute(dailyArray);
     }
-
-
 
 }
