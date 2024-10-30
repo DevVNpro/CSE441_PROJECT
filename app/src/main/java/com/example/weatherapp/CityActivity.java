@@ -24,7 +24,7 @@ public class CityActivity extends AppCompatActivity {
      //   txtCities = findViewById(R.id.txt_cities);
 
         // Lấy danh sách các thành phố và hiển thị
-        Set<String> cities = cityManager.getAllCities();
-        txtCities.setText("Cities: " + cities.toString());
+       // Set<String> cities = cityManager.getAllCities();
+      //  txtCities.setText("Cities: " + cities.toString());
     }
 }

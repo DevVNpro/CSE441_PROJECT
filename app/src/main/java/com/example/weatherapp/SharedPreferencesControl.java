@@ -3,7 +3,13 @@ package com.example.weatherapp;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 
 public class SharedPreferencesControl {
 
@@ -19,24 +25,34 @@ public class SharedPreferencesControl {
         editor = sharedPreferences.edit();
     }
 
-    public void saveCities(HashSet<String> cities) {
-        editor.putStringSet(KEY_CITIES, cities);
+    public void saveCities(List<CityForecast> cityForecast) {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String json = gson.toJson(cityForecast);
+        editor.putStringSet(KEY_CITIES, Collections.singleton(json));
         editor.apply();
     }
 
-    public HashSet<String> getCities() {
+    public  List<CityForecast>  getCities() {
         boolean isFirstLaunch = sharedPreferences.getBoolean(KEY_FIRST_LAUNCH, true);
+        HashSet<String> citiesSet = (HashSet<String>) sharedPreferences.getStringSet(KEY_CITIES, new HashSet<>());
 
-        HashSet<String> cities = (HashSet<String>) sharedPreferences.getStringSet(KEY_CITIES, new HashSet<>());
-
+        // Nếu là lần đầu, thêm dữ liệu mẫu vào HashSet
         if (isFirstLaunch) {
-            cities.add("Ha Noi");
-            saveCities(cities);
+            citiesSet.add("{\"cityName\":\"Ha Noi\",\"temperature\":\"25.0\",\"highTemp\":\"30.0\",\"lowTemp\":\"20.0\",\"description\":\"Clear sky\"}");
 
             editor.putBoolean(KEY_FIRST_LAUNCH, false);
             editor.apply();
         }
 
-        return cities;
+        List<CityForecast> cityForecasts = new ArrayList<>();
+        Gson gson = new Gson();
+
+        for (String cityJson : citiesSet) {
+            // Chuyển từ chuỗi JSON sang đối tượng CityForecast
+            CityForecast cityForecast = gson.fromJson(cityJson, CityForecast.class);
+            cityForecasts.add(cityForecast);
+        }
+
+        return cityForecasts;
     }
 }
