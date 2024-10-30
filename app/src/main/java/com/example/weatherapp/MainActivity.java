@@ -40,7 +40,7 @@ import java.util.TimeZone;
        private DailyForecastAdapter dailyForecastAdapter;
         private TextView cityNameTextView, currentTemperatureTextView, weatherDescriptionTextView, highLowTempTextView, rainPercentageTextView, windSpeedTextView, humidityPercentageTextView, currentTimeTextView;
         private ImageView weatherIconImageView, rainIconImageView, windIconImageView, humidityIconImageView;
-
+        FirebaseDatabaseHelper firebaseDatabaseHelper;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -69,6 +69,10 @@ import java.util.TimeZone;
              dailyForecastAdapter = new DailyForecastAdapter(new ArrayList<>());
             dailyForecastRecyclerView.setAdapter(dailyForecastAdapter);*/
 
+            if(firebaseDatabaseHelper == null){
+                firebaseDatabaseHelper = new FirebaseDatabaseHelper();
+
+            }
 
             // Retrieve the city name from the Intent
             String cityName = getIntent().getStringExtra("city_name");
@@ -105,6 +109,8 @@ import java.util.TimeZone;
                 @Override
                 public void onSuccess(WeatherCity weatherCity) {
                     updateUI(weatherCity);
+                    firebaseDatabaseHelper.addWeather(weatherCity);
+
                 }
 
                 @Override

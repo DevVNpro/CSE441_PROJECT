@@ -11,6 +11,7 @@ import java.util.List;
 
 public class CityForecastActivity extends AppCompatActivity {
 
+    private CityManager cityManager;
     private RecyclerView recyclerView;
     private CityForecastAdapter cityForecastAdapter;
 
