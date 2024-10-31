@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -71,6 +72,13 @@ import java.util.TimeZone;
             dailyForecastRecyclerView.setAdapter(dailyForecastAdapter);*/
 
 
+            //thêm sự kiện onClick cho icon_bell
+            ImageView bellIcon = findViewById(R.id.icon_bell);
+            bellIcon.setOnClickListener(view -> {
+                DisasterWarningPopup warningPopup = new DisasterWarningPopup(this);
+                warningPopup.showWarning("Danger Warning", "Warning: Storm Level 8, Flood Warning...\nLocation: Hanoi\n...");
+            });
+
             // Retrieve the city name from the Intent
             String cityName = getIntent().getStringExtra("city_name");
             if (cityName != null && !cityName.isEmpty()) {
@@ -98,6 +106,8 @@ import java.util.TimeZone;
                 default: return R.drawable.sunny; // update icon after 2 days
             }
         }
+
+
         public void CallApi(String city){
 
             // Fetch weather data
@@ -115,6 +125,7 @@ import java.util.TimeZone;
             });
 
         }
+
 
         private void updateUI(WeatherCity weatherCity) {
             cityNameTextView.setText(weatherCity.getCity());
