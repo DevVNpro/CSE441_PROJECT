@@ -32,8 +32,6 @@ import java.util.List;
 public class CurrentLocationWeatherActivity extends AppCompatActivity {
 
     private FusedLocationProviderClient fusedLocationProviderClient;
-    //private TextView tvLocation, tvTemperature, tvStatus;
-    private Button btnGetWeather;
     private final String API_KEY = "ca0cc331f07186dbfb8156dbecaa91db";
     private static final int REQUEST_LOCATION_PERMISSION = 1;
     private static final int REQUEST_CHECK_SETTINGS = 2;
@@ -45,9 +43,8 @@ public class CurrentLocationWeatherActivity extends AppCompatActivity {
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
-
-        btnGetWeather = findViewById(R.id.get_weather_button);
-        btnGetWeather.setOnClickListener(v -> fetchWeather());
+        // Thực hiện kiểm tra và bật vị trí ngay khi Activity khởi tạo
+        fetchWeather();
     }
 
     private void fetchWeather() {

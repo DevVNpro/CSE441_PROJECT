@@ -29,5 +29,6 @@
         <activity android:name=".CityForecastActivity" />
         <activity android:name=".CityActivity"/>
         <activity android:name=".WeatherActivity"/>
+        <activity android:name=".MapActivity"/>
     </application>
 </manifest>

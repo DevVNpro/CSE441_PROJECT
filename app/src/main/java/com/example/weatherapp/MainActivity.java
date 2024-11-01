@@ -39,7 +39,7 @@ import java.util.TimeZone;
         private HourlyForecastAdapter hourlyForecastAdapter;
         private DailyForecastAdapter dailyForecastAdapter;
         private TextView cityNameTextView, currentTemperatureTextView, weatherDescriptionTextView, highLowTempTextView, rainPercentageTextView, windSpeedTextView, humidityPercentageTextView, currentTimeTextView;
-        private ImageView weatherIconImageView, rainIconImageView, windIconImageView, humidityIconImageView;
+        private ImageView weatherIconImageView, rainIconImageView, windIconImageView, humidityIconImageView, mapIconImageView;
 
         private static final int REQUEST_LOCATION_PERMISSION = 1;
         private static final int REQUEST_CHECK_SETTINGS = 2;
@@ -58,6 +58,7 @@ import java.util.TimeZone;
             windSpeedTextView = findViewById(R.id.wind_speed);
             humidityPercentageTextView = findViewById(R.id.humidity_percentage);
             currentTimeTextView = findViewById(R.id.current_time);
+            mapIconImageView = findViewById(R.id.icon_map);
 
             // Thiết lập RecyclerView cho Today (dự báo theo giờ)
             RecyclerView recyclerView = findViewById(R.id.hourly_forecast_recycler_view);
@@ -82,6 +83,14 @@ import java.util.TimeZone;
                 // Default to a city if none is provided
                 CallApi("tokyo");
             }
+
+            mapIconImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(MainActivity.this, MapActivity.class);
+                    startActivity(intent);
+                }
+            });
         }
 
 
@@ -118,6 +127,7 @@ import java.util.TimeZone;
             });
 
         }
+
         private void updateBackground(String description) {
             if (description.contains("clear")) {
                 layoutBackground.setBackgroundResource(R.drawable.bg_clear);
