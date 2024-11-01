@@ -78,7 +78,7 @@ import java.util.TimeZone;
             ImageView bellIcon = findViewById(R.id.icon_bell);
             bellIcon.setOnClickListener(view -> {
                 DisasterWarningPopup warningPopup = new DisasterWarningPopup(this);
-                warningPopup.showWarning("Danger Warning", "Warning: Storm Level 8, Flood Warning...\nLocation: Hanoi\n...");
+                warningPopup.showWarning("Danger Warning", "Warning: Storm Level 8, Flood \nLocation: tokyo\n");
             });
 
             // Retrieve the city name from the Intent
