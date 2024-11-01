@@ -68,9 +68,6 @@ public class WeatherAPI {
         weatherCity.setWeatherDescription(description);
 
 
-
-
-
         // Lấy dự báo thời tiết hiện tại
         JSONArray list = response.getJSONArray("list");
         JSONObject firstForecast = list.getJSONObject(0);

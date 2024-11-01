@@ -13,6 +13,4 @@ public class WeatherInfo {
     public List<HourlyForecast> hourlyForecasts;   // Danh sách dự báo theo giờ
     public List<SimpleForecast> simpleForecasts;     // Danh sách dự báo theo ngày
 
-
-
 }

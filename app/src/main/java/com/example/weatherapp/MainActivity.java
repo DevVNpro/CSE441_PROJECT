@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,7 @@ import java.util.TimeZone;
 
     public class MainActivity extends AppCompatActivity {
 
+        private LinearLayout layoutBackground;
         private HourlyForecastAdapter hourlyForecastAdapter;
         private DailyForecastAdapter dailyForecastAdapter;
         private TextView cityNameTextView, currentTemperatureTextView, weatherDescriptionTextView, highLowTempTextView, rainPercentageTextView, windSpeedTextView, humidityPercentageTextView, currentTimeTextView;
@@ -48,6 +50,7 @@ import java.util.TimeZone;
             setContentView(R.layout.activity_main);
 
             // Initialize UI components
+            layoutBackground = findViewById(R.id.layoutBackground);
             cityNameTextView = findViewById(R.id.city_name);
             currentTemperatureTextView = findViewById(R.id.current_temperature);
             highLowTempTextView = findViewById(R.id.high_low_temperatures);
@@ -115,8 +118,22 @@ import java.util.TimeZone;
             });
 
         }
+        private void updateBackground(String description) {
+            if (description.contains("clear")) {
+                layoutBackground.setBackgroundResource(R.drawable.bg_clear);
+            } else if (description.contains("cloud")) {
+                layoutBackground.setBackgroundResource(R.drawable.bg_cloudy);
+            } else if (description.contains("rain") || description.contains("shower")) {
+                layoutBackground.setBackgroundResource(R.drawable.bg_clear);
+            } else if (description.contains("sunny")) {
+                layoutBackground.setBackgroundResource(R.drawable.bg_sunny);
+            } else {
+                layoutBackground.setBackgroundResource(R.drawable.background_gradient);
+            }
+        }
 
         private void updateUI(WeatherCity weatherCity) {
+            updateBackground(weatherCity.getWeatherDescription());
             cityNameTextView.setText(weatherCity.getCity());
             currentTemperatureTextView.setText(String.format("%.1f°C", weatherCity.getCurrentTemperature()));
       //      weatherDescriptionTextView.setText(weatherCity.getWeatherDescription());

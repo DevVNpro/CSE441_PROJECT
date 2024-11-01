@@ -84,11 +84,15 @@ public class WeatherCity {
         weatherInfo.simpleForecasts = simpleForecasts;
     }
 
-    public String getCity() {
-        return city;
-    }
-
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public void setWeatherInfo(WeatherInfo weatherInfo) {
+        this.weatherInfo = weatherInfo;
+    }
+
+    public String getCity() {
+        return city;
     }
 }
