@@ -105,7 +105,7 @@ import java.util.TimeZone;
                 case "02d": return R.drawable.windy;
                 case "03d": return R.drawable.rainy;
                 case "04d": return R.drawable.storm;
-                default: return R.drawable.sunny; // update icon after 2 days
+                default: return R.drawable.sunny;
             }
         }
 
