@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,7 +35,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 
     public class MainActivity extends AppCompatActivity {
-
+        private LinearLayout layoutBackground;
         private HourlyForecastAdapter hourlyForecastAdapter;
         private DailyForecastAdapter dailyForecastAdapter;
         private TextView cityNameTextView, currentTemperatureTextView, weatherDescriptionTextView, highLowTempTextView, rainPercentageTextView, windSpeedTextView, humidityPercentageTextView, currentTimeTextView;
@@ -56,6 +57,7 @@ import java.util.TimeZone;
             windSpeedTextView = findViewById(R.id.wind_speed);
             humidityPercentageTextView = findViewById(R.id.humidity_percentage);
             currentTimeTextView = findViewById(R.id.current_time);
+            layoutBackground = findViewById(R.id.layoutBackground);
 
             // Thiết lập RecyclerView cho Today (dự báo theo giờ)
             RecyclerView recyclerView = findViewById(R.id.hourly_forecast_recycler_view);
@@ -65,11 +67,11 @@ import java.util.TimeZone;
             recyclerView.setAdapter(hourlyForecastAdapter);
 
 
-/*            // Thiết lập RecyclerView cho 7 Day-Forecast (dự báo theo ngày)
-            RecyclerView dailyForecastRecyclerView = findViewById(R.id.daily_forecast_recycler_view);
-            dailyForecastRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-             dailyForecastAdapter = new DailyForecastAdapter(new ArrayList<>());
-            dailyForecastRecyclerView.setAdapter(dailyForecastAdapter);*/
+            RecyclerView recyclerViewDaily = findViewById(R.id.daily_forecast_recycler_view);
+            LinearLayoutManager layoutManagerDaily = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+            recyclerViewDaily.setLayoutManager(layoutManagerDaily);
+            dailyForecastAdapter = new DailyForecastAdapter(new ArrayList<>());
+            recyclerViewDaily.setAdapter(dailyForecastAdapter);
 
 
             //thêm sự kiện onClick cho icon_bell
@@ -136,7 +138,7 @@ import java.util.TimeZone;
             windSpeedTextView.setText(String.format("Wind: %.1f m/s", weatherCity.getWindSpeed()));
             humidityPercentageTextView.setText(String.format("Humidity: %d%%", weatherCity.getHumidity()));
             hourlyForecastAdapter.updateForecastList(weatherCity.getHourlyForecasts());
-            //dailyForecastAdapter.updateForecastList(weatherCity.getDailyForecasts());
+            dailyForecastAdapter.updateForecastList(weatherCity.getDailyForecasts());
         }
         public void OnClickCityActivity(View view) {
             Intent intent = new Intent(this, CityForecastActivity.class);
