@@ -38,6 +38,9 @@ public class DailyForecastAdapter extends RecyclerView.Adapter<DailyForecastAdap
 
         holder.dayNameTextView.setText(dailyForecast.getDay());
         holder.temperatureTextView.setText(dailyForecast.getDescription());
+        holder.minTemperatureTextView.setText(String.valueOf(dailyForecast.getMinTemp()));
+        holder.maxTemperatureTextView.setText(String.valueOf(dailyForecast.getMaxTemp()));
+
         //holder.weatherIconImageView.setImageResource(dailyForecast.get());
     }
 
@@ -49,12 +52,16 @@ public class DailyForecastAdapter extends RecyclerView.Adapter<DailyForecastAdap
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView dayNameTextView;
         TextView temperatureTextView;
+        TextView minTemperatureTextView;
+        TextView maxTemperatureTextView;
         ImageView weatherIconImageView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             dayNameTextView = itemView.findViewById(R.id.day_name);
-            temperatureTextView = itemView.findViewById(R.id.min_max_temperature);
+            minTemperatureTextView= itemView.findViewById(R.id.Min_Temp);
+            maxTemperatureTextView= itemView.findViewById(R.id.Max_temp);
+            temperatureTextView = itemView.findViewById(R.id.current_temp);
             weatherIconImageView = itemView.findViewById(R.id.weather_icon);
         }
     }

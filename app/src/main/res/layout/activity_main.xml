@@ -176,7 +176,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/daily_forecast_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="125dp"
+        android:layout_height="124dp"
         android:padding="8dp" />
 
     <LinearLayout
@@ -210,21 +210,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_weight="10"
+            android:onClick="OnClickCityActivity"
             android:src="@drawable/hamberger"
             app:tint="#FFFFFF" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btn_City"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="City Manager"
-            android:onClick="OnClickCityActivity"
-            android:textColorLink="#66B369" />
     </LinearLayout>
 </LinearLayout>
 
