@@ -2,8 +2,6 @@ package com.example.weatherapp;
 
 import android.content.Context;
 
-import androidx.appcompat.app.WindowDecorActionBar;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -45,44 +43,23 @@ public class WeatherAPI {
     }
 
     private WeatherCity parseWeatherData(JSONObject response, String city) throws JSONException {
-//         Parse current temperature and description
-//        JSONObject cityInfo = response.getJSONObject("city");
+        WeatherCity weatherCity = new WeatherCity(city);
+
         JSONArray forecastList = response.getJSONArray("list");
 
+        // Get data for the first forecast
         JSONObject currentForecast = forecastList.getJSONObject(0);
         JSONObject mainData = currentForecast.getJSONObject("main");
         double currentTemp = mainData.getDouble("temp");
-        double minTemp = mainData.getDouble("temp_min");
-        double maxTemp = mainData.getDouble("temp_max");
-        int humidity = mainData.getInt("humidity");
-        double windSpeed = currentForecast.getJSONObject("wind").getDouble("speed");
+        int humidity = mainData.optInt("humidity", 0);
+        double windSpeed = currentForecast.getJSONObject("wind").optDouble("speed", 0.0);
         String description = currentForecast.getJSONArray("weather").getJSONObject(0).getString("description");
 
-        WeatherCity weatherCity = new WeatherCity(city);
-        weatherCity.setCity(String.valueOf(city));
         weatherCity.setCurrentTemperature(currentTemp);
-        weatherCity.setMinTemperature(minTemp);
-        weatherCity.setMaxTemperature(maxTemp);
         weatherCity.setHumidity(humidity);
         weatherCity.setWindSpeed(windSpeed);
         weatherCity.setWeatherDescription(description);
 
-
-
-
-
-        // Lấy dự báo thời tiết hiện tại
-        JSONArray list = response.getJSONArray("list");
-        JSONObject firstForecast = list.getJSONObject(0);
-        JSONObject main = firstForecast.getJSONObject("main");
-        JSONArray weatherArray = firstForecast.getJSONArray("weather");
-        JSONObject weather = weatherArray.getJSONObject(0);
-        JSONObject wind = firstForecast.getJSONObject("wind");
-
-        JSONObject jsonResponse = new JSONObject(String.valueOf(response)); // "response" là chuỗi JSON từ API
-        JSONArray dailyArray = jsonResponse.getJSONArray("list"); // Lấy danh sách "list" từ JSON
-
-        // Parse hourly forecast data for 12 intervals (36 hours)
         List<HourlyForecast> hourlyForecasts = new ArrayList<>();
         for (int i = 0; i < Math.min(12, forecastList.length()); i++) {
             JSONObject forecast = forecastList.getJSONObject(i);
@@ -91,6 +68,22 @@ public class WeatherAPI {
             hourlyForecasts.add(new HourlyForecast(String.format("%.1f°", tempHourly), hourlyDescription, i * 3));
         }
         weatherCity.setHourlyForecasts(hourlyForecasts);
+
+        List<SimpleForecast> dailyForecasts = new ArrayList<>();
+        for (int i = 0; i < 5; i++) { // Get forecast for 5 days
+            // For each day, take the first entry of the day's 8 entries
+            JSONObject dailyForecast = forecastList.getJSONObject(i * 8);
+            String day = "Day " + (i + 1);
+            String dailyDescription = dailyForecast.getJSONArray("weather").getJSONObject(0).getString("description");
+
+            // Get the current temperature and feels-like temperature for each day
+            double dayTemp = dailyForecast.getJSONObject("main").getDouble("temp");
+            double feelsLikeTemp = dailyForecast.getJSONObject("main").getDouble("feels_like");
+
+            // Add daily forecast to the list
+            dailyForecasts.add(new SimpleForecast(day, dailyDescription, (float) dayTemp, (float) feelsLikeTemp, (float) currentTemp));
+        }
+        weatherCity.setDailyForecasts(dailyForecasts);
 
         return weatherCity;
     }

@@ -5,37 +5,37 @@ public class SimpleForecast {
     private String description;
     private float minTemp;
     private float maxTemp;
+    private float currenttemp;
 
+    public SimpleForecast(String day, String description, float minTemp, float maxTemp,float currenttemp) {
+        this.day = day;
+        this.description = description;
+        this.minTemp = minTemp;
+        this.maxTemp = maxTemp;
+        this.currenttemp = currenttemp;
+    }
 
     public String getDay() {
         return day;
     }
 
-    public void setDay(String day) {
-        this.day = day;
-    }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     public float getMinTemp() {
         return minTemp;
     }
 
-    public void setMinTemp(float minTemp) {
-        this.minTemp = minTemp;
-    }
 
     public float getMaxTemp() {
         return maxTemp;
     }
 
-    public void setMaxTemp(float maxTemp) {
-        this.maxTemp = maxTemp;
-    }
+    private float GetCurrentTemp(){return  currenttemp;}
+
+
+
 }

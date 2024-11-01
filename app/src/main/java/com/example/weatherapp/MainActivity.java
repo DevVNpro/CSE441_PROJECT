@@ -66,11 +66,11 @@ import java.util.TimeZone;
             recyclerView.setAdapter(hourlyForecastAdapter);
 
 
-/*            // Thiết lập RecyclerView cho 7 Day-Forecast (dự báo theo ngày)
-            RecyclerView dailyForecastRecyclerView = findViewById(R.id.daily_forecast_recycler_view);
-            dailyForecastRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-             dailyForecastAdapter = new DailyForecastAdapter(new ArrayList<>());
-            dailyForecastRecyclerView.setAdapter(dailyForecastAdapter);*/
+            RecyclerView recyclerViewDaily = findViewById(R.id.daily_forecast_recycler_view);
+            LinearLayoutManager layoutManagerDaily = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+            recyclerViewDaily.setLayoutManager(layoutManagerDaily);
+            dailyForecastAdapter = new DailyForecastAdapter(new ArrayList<>());
+            recyclerViewDaily.setAdapter(dailyForecastAdapter);
 
 
             // Retrieve the city name from the Intent
@@ -121,12 +121,13 @@ import java.util.TimeZone;
         private void updateUI(WeatherCity weatherCity) {
             cityNameTextView.setText(weatherCity.getCity());
             currentTemperatureTextView.setText(String.format("%.1f°C", weatherCity.getCurrentTemperature()));
-      //      weatherDescriptionTextView.setText(weatherCity.getWeatherDescription());
+            //weatherDescriptionTextView.setText(weatherCity.getWeatherDescription());
             highLowTempTextView.setText(String.format("H: %.1f° / L: %.1f°", weatherCity.getMaxTemperature(), weatherCity.getMinTemperature()));
             rainPercentageTextView.setText(String.format("Rain: %.1f%%", weatherCity.getRainfall()));
             windSpeedTextView.setText(String.format("Wind: %.1f m/s", weatherCity.getWindSpeed()));
             humidityPercentageTextView.setText(String.format("Humidity: %d%%", weatherCity.getHumidity()));
             hourlyForecastAdapter.updateForecastList(weatherCity.getHourlyForecasts());
+            dailyForecastAdapter.updateForecastList(weatherCity.getDailyForecasts());
         }
         public void OnClickCityActivity(View view) {
             Intent intent = new Intent(this, CityForecastActivity.class);
