@@ -1,10 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape android:shape="rectangle">
             <gradient
-                android:startColor="#8693ab"
-                android:endColor="#4d5975"
-                android:angle="270" />
+                android:startColor="#7A8FA6"
+                android:centerColor="#B0C4DE"
+                android:endColor="#E1E9F2"
+                android:angle="270"/>
         </shape>
     </item>
 </layer-list>
