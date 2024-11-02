@@ -91,4 +91,17 @@ public class WeatherCity {
     public void setCity(String city) {
         this.city = city;
     }
+    public void updateWeatherInfo(WeatherCity newCityInfo) {
+        if (newCityInfo != null) {
+            this.weatherInfo.currentTemperature = newCityInfo.getCurrentTemperature();
+            this.weatherInfo.weatherDescription = newCityInfo.getWeatherDescription();
+            this.weatherInfo.maxTemperature = newCityInfo.getMaxTemperature();
+            this.weatherInfo.minTemperature = newCityInfo.getMinTemperature();
+            this.weatherInfo.rainfall = newCityInfo.getRainfall();
+            this.weatherInfo.humidity = newCityInfo.getHumidity();
+            this.weatherInfo.windSpeed = newCityInfo.getWindSpeed();
+            this.weatherInfo.hourlyForecasts = newCityInfo.getHourlyForecasts();
+            this.weatherInfo.simpleForecasts = newCityInfo.getDailyForecasts();
+        }
+    }
 }

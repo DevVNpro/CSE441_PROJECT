@@ -38,8 +38,8 @@ public class DailyForecastAdapter extends RecyclerView.Adapter<DailyForecastAdap
 
         holder.dayNameTextView.setText(dailyForecast.getDay());
         holder.temperatureTextView.setText(dailyForecast.getDescription());
-        holder.minTemperatureTextView.setText(String.valueOf(dailyForecast.getMinTemp()));
-        holder.maxTemperatureTextView.setText(String.valueOf(dailyForecast.getMaxTemp()));
+        holder.minTemperatureTextView.setText("T:"+String.valueOf(dailyForecast.getMinTemp()));
+        holder.maxTemperatureTextView.setText("FT:" +String.valueOf(dailyForecast.getMaxTemp()));
 
         //holder.weatherIconImageView.setImageResource(dailyForecast.get());
     }

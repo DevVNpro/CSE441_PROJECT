@@ -30,7 +30,7 @@
             android:textSize="22sp" />
 
         <TextView
-            android:id="@+id/current_time"
+            android:id="@+id/current_day_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Mon June 17 | 10:00 AM"
@@ -122,17 +122,6 @@
                 android:textColor="@android:color/white"
                 android:textSize="16sp" />
 
-            <Button
-                android:id="@+id/get_weather_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="2dp"
-                android:backgroundTint="@color/orange"
-                android:onClick="GetData"
-                android:padding="8dp"
-                android:text="Get Weather" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -183,51 +172,59 @@
         android:id="@+id/daily_forecast_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="7 Day-Forecast"
-        android:textSize="18sp"
+        android:padding="4dp"
+        android:text="5 DAY NEXT"
         android:textColor="@android:color/white"
-        android:padding="4dp" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/daily_forecast_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="134dp"
-        android:padding="8dp" />
+        android:textSize="18sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:gravity="bottom"
-        android:orientation="horizontal"
-        android:padding="12dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/icon_map"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_weight="10"
-            android:paddingTop="5dp"
-            android:paddingEnd="10dp"
-            android:src="@drawable/map"
-            app:tint="#FFFFFF"
-            tools:ignore="RtlSymmetry" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/daily_forecast_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:padding="8dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="bottom"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+            <ImageView
+                android:id="@+id/icon_map"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_weight="10"
+                android:paddingTop="5dp"
+                android:paddingEnd="10dp"
+                android:src="@drawable/map"
+                app:tint="#FFFFFF"
+                tools:ignore="RtlSymmetry" />
 
 
-        <View
-            android:layout_width="600dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="10" />
+            <View
+                android:layout_width="600dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="10" />
 
-        <ImageView
-            android:id="@+id/icon_hamberger"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_weight="10"
-            android:onClick="OnClickCityActivity"
-            android:src="@drawable/hamberger"
-            app:tint="#FFFFFF" />
+            <ImageView
+                android:id="@+id/icon_hamberger"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_weight="10"
+                android:onClick="OnClickCityActivity"
+                android:src="@drawable/hamberger"
+                app:tint="#FFFFFF" />
+        </LinearLayout>
+
     </LinearLayout>
+
 </LinearLayout>
 

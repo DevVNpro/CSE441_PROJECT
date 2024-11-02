@@ -47,7 +47,10 @@ public class CityForecastAdapter extends RecyclerView.Adapter<CityForecastAdapte
         private final TextView txtLow;
         private final TextView txtDescription;
         private  Button button;
-
+        private OnCityDeleteListener deleteListener;
+        public interface OnCityDeleteListener {
+            void onCityDelete(WeatherCity city);
+        }
         public CityForecastViewHolder(@NonNull View itemView) {
             super(itemView);
             txtCityName = itemView.findViewById(R.id.txt_city_name);
@@ -56,13 +59,14 @@ public class CityForecastAdapter extends RecyclerView.Adapter<CityForecastAdapte
             txtLow = itemView.findViewById(R.id.txt_low_temp);
             txtDescription = itemView.findViewById(R.id.txt_description);
             button = itemView.findViewById(R.id.btn_city);
+            this.deleteListener = deleteListener;
         }
 
         public void bind(CityForecast city) {
             txtCityName.setText(city.getCityName());
-            txtTemp.setText("Temperature: " + city.getTemperature() + "°C");
-            txtHigh.setText("High: " + city.getHighTemp() + "°C");
-            txtLow.setText("Low: " + city.getLowTemp() + "°C");
+            txtTemp.setText("Temp: " + city.getTemperature() + "°C");
+            txtHigh.setText("H: " + city.getHighTemp() + "°C");
+            txtLow.setText("L: " + city.getLowTemp() + "°C");
             txtDescription.setText(city.getDescription());
             // Set OnClickListener for the button
 

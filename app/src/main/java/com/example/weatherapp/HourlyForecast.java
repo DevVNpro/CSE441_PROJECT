@@ -17,12 +17,11 @@ public class HourlyForecast {
     }
 
     private String convertTimestampToTime(long timestamp) {
-        // Chuyển đổi Unix timestamp thành thời gian
-        Date date = new Date(timestamp * 1000L); // API trả về Unix timestamp (giây)
-        SimpleDateFormat sdf = new SimpleDateFormat("h:mm a", Locale.getDefault());
-        sdf.setTimeZone(TimeZone.getDefault()); // Cài đặt múi giờ mặc định
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.getDefault());
+        Date date = new Date(timestamp);
         return sdf.format(date);
     }
+
 
     public String getTemperature() {
         return temperature;
