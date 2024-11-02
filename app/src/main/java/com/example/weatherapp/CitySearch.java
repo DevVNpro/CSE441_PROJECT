@@ -14,7 +14,7 @@ public class CitySearch extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_city_manager); // Đảm bảo bạn có layout này
 
-        searchView = findViewById(R.id.searchbar);
+        searchView = findViewById(R.id.search_view);
         setupSearchView();
     }
 

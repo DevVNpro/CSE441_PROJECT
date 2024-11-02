@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.EventLogTags;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -179,8 +180,21 @@ import android.location.Address;
 
         }
 
-
+        private void updateBackground(String description){
+            if (description.contains("clear")){
+                layoutBackground.setBackgroundResource(R.drawable.bg_clear);
+            } else if (description.contains("rainy")) {
+                layoutBackground.setBackgroundResource(R.drawable.bg_rainy);
+            } else if (description.contains("cloud")) {
+                layoutBackground.setBackgroundResource(R.drawable.bg_cloudy);
+            } else if (description.contains("sunny")) {
+                layoutBackground.setBackgroundResource(R.drawable.bg_sunny);
+            } else {
+                layoutBackground.setBackgroundResource(R.drawable.background_gradient);
+            }
+        }
         private void updateUI(WeatherCity weatherCity) {
+            updateBackground(weatherCity.getWeatherDescription());
             cityNameTextView.setText(weatherCity.getCity());
             currentTemperatureTextView.setText(String.format("%.1f°C", weatherCity.getCurrentTemperature()));
             //weatherDescriptionTextView.setText(weatherCity.getWeatherDescription());
