@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Mon"
-        android:textColor="@color/cloud_white"
+        android:textColor="@color/black"
         android:textSize="16sp"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="8dp" />
@@ -34,7 +34,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="H:28° L:18°"
-        android:textColor="@color/cloud_white"
+        android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/delete_city_Button"
         app:layout_constraintHorizontal_bias="0.636"
@@ -48,7 +48,7 @@
         android:layout_marginStart="84dp"
         android:layout_marginTop="4dp"
         android:text="High: 28°"
-        android:textColor="#FFFFFF"
+        android:textColor="#070707"
         app:layout_constraintEnd_toStartOf="@+id/delete_city_Button"
         app:layout_constraintHorizontal_bias="0.048"
         app:layout_constraintStart_toEndOf="@+id/weather_icon"
@@ -61,7 +61,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="4dp"
         android:text="Low: 18°"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         app:layout_constraintStart_toEndOf="@id/Max_temp"
         app:layout_constraintTop_toBottomOf="@id/current_temp" />
 

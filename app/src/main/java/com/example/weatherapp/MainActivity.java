@@ -299,9 +299,8 @@ import android.location.Address;
                         List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
                         if (addresses != null && !addresses.isEmpty()) {
                             String cityName = addresses.get(0).getLocality();
-                            CallApi(cityName);
+                            CallApi("Ha Noi");
                             if (cityName != null) {
-                                Toast.makeText(this, "Thành phố: " + cityName, Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(this, "Không tìm thấy tên thành phố", Toast.LENGTH_SHORT).show();
                             }
