@@ -67,7 +67,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.CityViewHo
             cityButton.setOnClickListener(v -> {
                 // Xử lý click nút
                 if (!isNetworkAvailable(v.getContext()) && !CityManager.instance.cityExists(city)) {
-                    Toast.makeText(v.getContext(), "Connect Internet False", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(), "Kết nối mạng lỗi", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(v.getContext(), "Selected: " + city, Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(v.getContext(), MainActivity.class);
