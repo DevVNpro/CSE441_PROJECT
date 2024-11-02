@@ -3,6 +3,7 @@ package com.example.weatherapp;
 import java.util.List;
 
 public class WeatherInfo {
+    public String datetime;
     public double currentTemperature;    // Nhiệt độ hiện tại
     public String weatherDescription;    // Mô tả thời tiết hiện tại
     public double maxTemperature;        // Nhiệt độ cao nhất

@@ -31,7 +31,6 @@
         <activity android:name=".CurrentLocationWeatherActivity"/>
         <activity android:name=".CityForecastActivity" />
         <activity android:name=".BackgroundChangeActivity"/>
-        <activity android:name=".CityActivity"/>
         <activity android:name=".WeatherActivity"/>
     </application>
 </manifest>

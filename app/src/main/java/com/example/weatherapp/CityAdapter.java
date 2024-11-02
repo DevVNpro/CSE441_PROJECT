@@ -1,5 +1,6 @@
 package com.example.weatherapp;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class CityAdapter extends RecyclerView.Adapter<CityAdapter.CityViewHolder> {
-
     private List<WeatherCity> cityList;
+    private final CityForecastActivity activity; // Tham chiếu đến activity
 
-    public CityAdapter(List<WeatherCity> cityList) {
+    public CityAdapter(List<WeatherCity> cityList, CityForecastActivity activity) {
         this.cityList = cityList;
+        this.activity = activity; // Lưu trữ tham chiếu đến activity
     }
 
     public void updateCities(List<WeatherCity> newCityList) {
@@ -27,13 +29,13 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.CityViewHolder
     @Override
     public CityViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_city_manager_forecast, parent, false);
-        return new CityViewHolder(view, this);  // Pass the adapter instance to the ViewHolder
+        return new CityViewHolder(view, this, (CityForecastActivity) parent.getContext()); // Truyền activity
     }
 
     @Override
     public void onBindViewHolder(@NonNull CityViewHolder holder, int position) {
         WeatherCity city = cityList.get(position);
-        holder.bind(city);  // Call bind method to set data
+        holder.bind(city);  // Gọi phương thức bind để thiết lập dữ liệu
     }
 
     @Override
@@ -48,17 +50,21 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.CityViewHolder
         private final TextView maxTemp;
         private final ImageView weatherIcon;
         private final Button deleteButton;
-        private final CityAdapter adapter;  // Reference to the adapter
+        private final Button submitbButton;
+        private final CityAdapter adapter;  // Tham chiếu đến adapter
+        private final CityForecastActivity activity; // Tham chiếu đến activity
 
-        public CityViewHolder(@NonNull View itemView, CityAdapter adapter) {  // Accept adapter in constructor
+        public CityViewHolder(@NonNull View itemView, CityAdapter adapter, CityForecastActivity activity) {
             super(itemView);
-            this.adapter = adapter;  // Initialize the adapter reference
+            this.adapter = adapter;
+            this.activity = activity; // Khởi tạo tham chiếu đến activity
             dayName = itemView.findViewById(R.id.day_name);
             currentTemp = itemView.findViewById(R.id.current_temp);
             minTemp = itemView.findViewById(R.id.Min_Temp);
             maxTemp = itemView.findViewById(R.id.Max_temp);
             weatherIcon = itemView.findViewById(R.id.weather_icon);
             deleteButton = itemView.findViewById(R.id.delete_city_Button);
+            submitbButton = itemView.findViewById(R.id.submid_city_button);
         }
 
         public void bind(WeatherCity city) {
@@ -67,12 +73,15 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.CityViewHolder
             minTemp.setText("Min: " + city.getMinTemperature() + "°C");
             maxTemp.setText("Max: " + city.getMaxTemperature() + "°C");
 
-            // Optionally, set weather icon
-            // weatherIcon.setImageResource(R.drawable.ic_weather_icon);
+            submitbButton.setOnClickListener(v -> {
+                CityManager.instance.SetLastCityView(city.getCity());
+                Intent intent = new Intent(itemView.getContext(), MainActivity.class);
+                intent.putExtra("city_name", city.getCity());
+                itemView.getContext().startActivity(intent);
+            });
 
             deleteButton.setOnClickListener(v -> {
-                CityManager.instance.removeCity(city);  // Remove the city from CityManager
-                adapter.updateCities(CityManager.instance.getCities());  // Update adapter data
+                activity.showDeleteConfirmationDialog(city); // Hiển thị hộp thoại xác nhận
             });
         }
     }
