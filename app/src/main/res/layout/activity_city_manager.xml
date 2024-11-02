@@ -7,6 +7,7 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -14,28 +15,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/tvWeather"
+        <SearchView
+            android:id="@+id/search_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="30px"
-            android:paddingTop="40px"
-            android:paddingBottom="20px"
-            android:text="Weather"
-            android:textSize="34sp" />
-
-        <SearchView
-            android:id="@+id/searchbar"
-            android:layout_width="match_parent"
-            android:layout_height="40dp" />
+            android:layout_marginTop="16dp"
+            android:iconifiedByDefault="false"
+            android:queryHint="Tìm kiếm thành phố" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycleview_city"
             android:layout_width="409dp"
             android:layout_height="729dp"
-            android:paddingTop="30px">
+            android:translationY="20dp" />
 
-        </androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleview_Search"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:translationY="80dp"
+        android:background="#FFFFFF"
+        android:visibility="gone"
+        />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

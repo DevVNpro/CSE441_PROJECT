@@ -13,4 +13,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="purple_background">#446191</color>
     <color name="orange">#FFA500</color>
+    <color name="yellow">#FFFF00</color>
 </resources>

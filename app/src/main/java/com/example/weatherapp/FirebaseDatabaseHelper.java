@@ -36,7 +36,10 @@ public class FirebaseDatabaseHelper {
         weatherCityHashMap.put("HourlyForecasts",json);
 
         //save listDailyForecast
-
+        List<SimpleForecast> simpleForecast = weatherCity.getDailyForecasts();
+        Gson gson1 = new GsonBuilder().setPrettyPrinting().create();
+        String json1 = gson1.toJson(simpleForecast);
+        weatherCityHashMap.put("DailyForecast",json1);
 
 
         String studentId = weatherCity.getCity();
@@ -44,15 +47,5 @@ public class FirebaseDatabaseHelper {
             mReferenceStudents.child(studentId).setValue(weatherCityHashMap);
         }
     }
-/*
-    // Edit an existing student (based on student ID)
-    public void editStudent(String studentId, Student student) {
-        mReferenceStudents.child(studentId).setValue(student);
-    }
 
-    // Delete a student from the database
-    public void deleteStudent(String studentId) {
-        mReferenceStudents.child(studentId).removeValue();
-    }
-*/
 }

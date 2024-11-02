@@ -1,8 +1,7 @@
 package com.example.weatherapp;
 
 import android.content.Context;
-
-import androidx.appcompat.app.WindowDecorActionBar;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -15,8 +14,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class WeatherAPI {
     private static final String API_KEY = "ca0cc331f07186dbfb8156dbecaa91db";
@@ -45,50 +48,86 @@ public class WeatherAPI {
     }
 
     private WeatherCity parseWeatherData(JSONObject response, String city) throws JSONException {
-//         Parse current temperature and description
-//        JSONObject cityInfo = response.getJSONObject("city");
+        WeatherCity weatherCity = new WeatherCity(city);
+
         JSONArray forecastList = response.getJSONArray("list");
 
+        // Get data for the first forecast
         JSONObject currentForecast = forecastList.getJSONObject(0);
         JSONObject mainData = currentForecast.getJSONObject("main");
         double currentTemp = mainData.getDouble("temp");
-        double minTemp = mainData.getDouble("temp_min");
-        double maxTemp = mainData.getDouble("temp_max");
-        int humidity = mainData.getInt("humidity");
-        double windSpeed = currentForecast.getJSONObject("wind").getDouble("speed");
+        int humidity = mainData.optInt("humidity", 0);
+        double windSpeed = currentForecast.getJSONObject("wind").optDouble("speed", 0.0);
         String description = currentForecast.getJSONArray("weather").getJSONObject(0).getString("description");
+        double minTemp = mainData.optDouble("temp_min", 0.0);  // Default to 0.0 if not available
+        double maxTemp = mainData.optDouble("temp_max", 0.0);
 
-        WeatherCity weatherCity = new WeatherCity(city);
-        weatherCity.setCity(String.valueOf(city));
+
+
+       // weatherCity.SetDateTime(formattedDate);
         weatherCity.setCurrentTemperature(currentTemp);
-        weatherCity.setMinTemperature(minTemp);
-        weatherCity.setMaxTemperature(maxTemp);
         weatherCity.setHumidity(humidity);
         weatherCity.setWindSpeed(windSpeed);
         weatherCity.setWeatherDescription(description);
+        weatherCity.setMaxTemperature(maxTemp);
+        weatherCity.setMinTemperature(minTemp);
 
-
-        // Lấy dự báo thời tiết hiện tại
-        JSONArray list = response.getJSONArray("list");
-        JSONObject firstForecast = list.getJSONObject(0);
-        JSONObject main = firstForecast.getJSONObject("main");
-        JSONArray weatherArray = firstForecast.getJSONArray("weather");
-        JSONObject weather = weatherArray.getJSONObject(0);
-        JSONObject wind = firstForecast.getJSONObject("wind");
-
-        JSONObject jsonResponse = new JSONObject(String.valueOf(response)); // "response" là chuỗi JSON từ API
-        JSONArray dailyArray = jsonResponse.getJSONArray("list"); // Lấy danh sách "list" từ JSON
-
-        // Parse hourly forecast data for 12 intervals (36 hours)
         List<HourlyForecast> hourlyForecasts = new ArrayList<>();
-        for (int i = 0; i < Math.min(12, forecastList.length()); i++) {
-            JSONObject forecast = forecastList.getJSONObject(i);
+        long currentTime = System.currentTimeMillis();
+
+        long currentHour = (currentTime / (3600 * 1000)) * (3600 * 1000);
+        if (currentTime % (3600 * 1000) != 0) {
+            currentHour += 3600 * 1000;
+        }
+        long nextHourTime = currentHour;
+
+        for (int i = 0; i < 8; i++) {
+            JSONObject forecast;
+
+            if (i == 0) {
+                forecast = forecastList.getJSONObject(0);
+            } else {
+                // Dự báo cho các giờ tiếp theo, cách nhau 3 giờ
+                forecast = forecastList.getJSONObject(i - 1);
+            }
+
             double tempHourly = forecast.getJSONObject("main").getDouble("temp");
             String hourlyDescription = forecast.getJSONArray("weather").getJSONObject(0).getString("description");
-            hourlyForecasts.add(new HourlyForecast(String.format("%.1f°", tempHourly), hourlyDescription, i * 3));
+
+            hourlyForecasts.add(new HourlyForecast(String.format("%.1f°", tempHourly), hourlyDescription, nextHourTime));
+
+            nextHourTime += 3 * 3600 * 1000;
         }
+
+
+
         weatherCity.setHourlyForecasts(hourlyForecasts);
 
+        List<SimpleForecast> dailyForecasts = new ArrayList<>();
+        Calendar calendar = Calendar.getInstance();
+
+        for (int i = 0; i < 5; i++) {
+            JSONObject dailyForecast = forecastList.getJSONObject(i * 8);
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+
+            String day = new SimpleDateFormat("EEEE", Locale.getDefault()).format(calendar.getTime());
+
+            String dailyDescription = dailyForecast.getJSONArray("weather").getJSONObject(0).getString("description");
+
+            double dayTemp = dailyForecast.getJSONObject("main").getDouble("temp");
+            double feelsLikeTemp = dailyForecast.getJSONObject("main").getDouble("feels_like");
+
+            dailyForecasts.add(new SimpleForecast(day, dailyDescription, (float) dayTemp, (float) feelsLikeTemp, (float) currentTemp));
+        }
+
+        weatherCity.setDailyForecasts(dailyForecasts);
+        //update data in shareReference
+        if(CityManager.instance.cityExists(weatherCity.getCity())){
+            CityManager.instance.updateCity(weatherCity);
+        }
+        else {
+            CityManager.instance.addCity(weatherCity);
+        }
         return weatherCity;
     }
 
