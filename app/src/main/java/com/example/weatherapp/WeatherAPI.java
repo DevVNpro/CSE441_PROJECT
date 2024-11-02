@@ -1,6 +1,7 @@
 package com.example.weatherapp;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -135,4 +136,34 @@ public class WeatherAPI {
         void onSuccess(WeatherCity weatherCity);
         void onFailure(String errorMessage);
     }
+
+
+    public void fetchDisasterWarning(String city, DisasterWarningCallback callback) {
+        // Code để gọi API và xử lý dữ liệu JSON từ API
+        // Giả định giá trị JSON:
+        String warningTitle = "Danger Warning";
+        String warningDetails = "Warning: Storm Level 8, Flood Warning";
+        String location = "Ha Noi";
+        String severity = "Level 1 - Level 3";
+        String duration = "Mon June 17 - Tue June 18";
+        String instructions = "Stay away from the coast, move to high ground.";
+
+
+        callback.onSuccess(warningTitle, warningDetails, location, severity, duration, instructions);
+    }
+
+
+
+
+
+
+
+    public interface DisasterWarningCallback {
+        void onSuccess(String warningTitle, String warningDetails, String location, String severity, String duration, String instructions);
+
+        void onSuccess(String warningTitle, String warningDetails);
+        void onFailure(String errorMessage);
+    }
+
 }
+

@@ -87,10 +87,12 @@ import android.location.Address;
             dailyForecastAdapter = new DailyForecastAdapter(new ArrayList<>());
             recyclerViewDaily.setAdapter(dailyForecastAdapter);
 
+
+
             ImageView bellIcon = findViewById(R.id.icon_bell);
             bellIcon.setOnClickListener(view -> {
                 DisasterWarningPopup warningPopup = new DisasterWarningPopup(this);
-                warningPopup.showWarning("Danger Warning", "Warning: Storm Level 8, Flood \nLocation: tokyo\n");
+                warningPopup.showDisasterWarning("Tokyo"); // Thay "Tokyo" bằng tên thành phố bạn muốn
             });
 
 
@@ -323,8 +325,10 @@ import android.location.Address;
 
 
 
-
     }
+
+
+
 
 
 
