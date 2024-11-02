@@ -37,7 +37,7 @@ public class CitySearchAdapter extends RecyclerView.Adapter<CitySearchAdapter.Vi
 
         public ViewHolder(View itemView) {
             super(itemView);
-            cityTextView = itemView.findViewById(R.id.cityTextView); // ID của TextView trong city_item.xml
+            cityTextView = itemView.findViewById(R.id.city_name); // ID của TextView trong city_item.xml
         }
     }
 }

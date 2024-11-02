@@ -12,7 +12,7 @@ public class CitySearch extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_city_search); // Đảm bảo bạn có layout này
+        setContentView(R.layout.activity_city_manager; // Đảm bảo bạn có layout này
 
         searchView = findViewById(R.id.searchbar);
         setupSearchView();
@@ -23,7 +23,7 @@ public class CitySearch extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 // Khi người dùng nhấn Enter
-                Intent intent = new Intent(CitySearch.this, SearchItemActivity.class);
+                Intent intent = new Intent(CitySearch.this, CitySearchAdapter.class);
                 intent.putExtra("city_name", query);
                 startActivity(intent);
                 return true;
