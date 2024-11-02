@@ -31,7 +31,6 @@
         <activity android:name=".CurrentLocationWeatherActivity"/>
         <activity android:name=".CityForecastActivity" />
         <activity android:name=".CitySearch"/>
-        <activity android:name=".WeatherActivity"/>
         <activity android:name=".MapActivity"/>
     </application>
 </manifest>
