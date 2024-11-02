@@ -32,7 +32,9 @@ import java.util.List;
 public class CurrentLocationWeatherActivity extends AppCompatActivity {
 
     private FusedLocationProviderClient fusedLocationProviderClient;
-    private final String API_KEY = "ca0cc331f07186dbfb8156dbecaa91db";
+    private TextView tvLocation, tvTemperature, tvStatus;
+    private Button btnGetWeather; // Khai báo nút
+    private final String API_KEY = "ca0cc331f07186dbfb8156dbecaa91db"; // Thay thế bằng API key thực tế
     private static final int REQUEST_LOCATION_PERMISSION = 1;
     private static final int REQUEST_CHECK_SETTINGS = 2;
 

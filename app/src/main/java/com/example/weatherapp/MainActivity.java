@@ -59,6 +59,7 @@ import java.util.TimeZone;
             humidityPercentageTextView = findViewById(R.id.humidity_percentage);
             currentTimeTextView = findViewById(R.id.current_time);
             mapIconImageView = findViewById(R.id.icon_map);
+            layoutBackground = findViewById(R.id.layoutBackground);
 
             // Thiết lập RecyclerView cho Today (dự báo theo giờ)
             RecyclerView recyclerView = findViewById(R.id.hourly_forecast_recycler_view);

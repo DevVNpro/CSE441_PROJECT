@@ -13,14 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class DailyForecastAdapter extends RecyclerView.Adapter<DailyForecastAdapter.ViewHolder> {
-    private List<DailyForecast> dailyForecastList;
+    private List<SimpleForecast> dailyForecastList;
 
-    public DailyForecastAdapter(List<DailyForecast> dailyForecastList) {
+    public DailyForecastAdapter(List<SimpleForecast> dailyForecastList) {
         this.dailyForecastList = dailyForecastList;
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    public void updateForecastList(List<DailyForecast> newForecastList) {
+    public void updateForecastList(List<SimpleForecast> newForecastList) {
         this.dailyForecastList.clear();
         this.dailyForecastList.addAll(newForecastList);
         notifyDataSetChanged();
@@ -34,11 +34,14 @@ public class DailyForecastAdapter extends RecyclerView.Adapter<DailyForecastAdap
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        DailyForecast dailyForecast = dailyForecastList.get(position);
+        SimpleForecast dailyForecast = dailyForecastList.get(position);
 
-        holder.dayNameTextView.setText(dailyForecast.getDayName());
-        holder.temperatureTextView.setText(dailyForecast.getMinMaxTemperature());
-        holder.weatherIconImageView.setImageResource(dailyForecast.getIconResId());
+        holder.dayNameTextView.setText(dailyForecast.getDay());
+        holder.temperatureTextView.setText(dailyForecast.getDescription());
+        holder.minTemperatureTextView.setText(String.valueOf(dailyForecast.getMinTemp()));
+        holder.maxTemperatureTextView.setText(String.valueOf(dailyForecast.getMaxTemp()));
+
+        //holder.weatherIconImageView.setImageResource(dailyForecast.get());
     }
 
     @Override
@@ -49,12 +52,16 @@ public class DailyForecastAdapter extends RecyclerView.Adapter<DailyForecastAdap
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView dayNameTextView;
         TextView temperatureTextView;
+        TextView minTemperatureTextView;
+        TextView maxTemperatureTextView;
         ImageView weatherIconImageView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             dayNameTextView = itemView.findViewById(R.id.day_name);
-            temperatureTextView = itemView.findViewById(R.id.min_max_temperature);
+            minTemperatureTextView= itemView.findViewById(R.id.Min_Temp);
+            maxTemperatureTextView= itemView.findViewById(R.id.Max_temp);
+            temperatureTextView = itemView.findViewById(R.id.current_temp);
             weatherIconImageView = itemView.findViewById(R.id.weather_icon);
         }
     }
