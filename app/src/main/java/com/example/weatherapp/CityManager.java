@@ -1,35 +1,55 @@
 package com.example.weatherapp;
 
-import java.util.HashSet;
-import java.util.Set;
+import android.content.Context;
+import android.content.SharedPreferences;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CityManager {
+    public static  CityManager instance;
+    private static final String PREFS_NAME = "WeatherAppPrefs";
+    private static final String CITIES_KEY = "cities";
+    private final SharedPreferences sharedPreferences;
+    private List<WeatherCity> cityList;
 
-    private SharedPreferencesControl sharedPreferencesControl;
-    private HashSet<String> cities;  // Set để lưu trữ các thành phố
-
-    // Constructor nhận SharedPreferencesControl
-    public CityManager(SharedPreferencesControl sharedPreferencesControl) {
-        this.sharedPreferencesControl = sharedPreferencesControl;
-        this.cities = sharedPreferencesControl.getCities();  // Lấy danh sách thành phố từ SharedPreferences
+    public CityManager(Context context) {
+        sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        instance = this;
+        loadCities();
     }
 
-    // Thêm một thành phố
-    public void addCity(String city) {
-        cities.add(city);  // Thêm thành phố vào Set
-        sharedPreferencesControl.saveCities(cities);  // Lưu danh sách thành phố vào SharedPreferences
-    }
-
-    // Xóa một thành phố
-    public void removeCity(String city) {
-        if (cities.contains(city)) {
-            cities.remove(city);  // Xóa thành phố từ Set
-            sharedPreferencesControl.saveCities(cities);  // Lưu lại danh sách thành phố
+    private void loadCities() {
+        String json = sharedPreferences.getString(CITIES_KEY, null);
+        if (json != null) {
+            Type type = new TypeToken<ArrayList<WeatherCity>>() {}.getType();
+            cityList = new Gson().fromJson(json, type);
+        } else {
+            cityList = new ArrayList<>();
         }
     }
 
-    // Lấy tất cả các thành phố
-    public Set<String> getAllCities() {
-        return cities;  // Trả về danh sách thành phố
+    private void saveCities() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(CITIES_KEY, new Gson().toJson(cityList));
+        editor.apply();
+    }
+
+    public List<WeatherCity> getCities() {
+        return cityList;
+    }
+
+    public void addCity(WeatherCity city) {
+        cityList.add(city);
+        saveCities();
+    }
+
+    public void removeCity(WeatherCity city) {
+        cityList.remove(city);
+        saveCities();
     }
 }
