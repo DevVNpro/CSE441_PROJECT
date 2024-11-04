@@ -47,14 +47,14 @@ import android.location.Address;
         private HourlyForecastAdapter hourlyForecastAdapter;
         private DailyForecastAdapter dailyForecastAdapter;
         private TextView cityNameTextView, currentTemperatureTextView, weatherDescriptionTextView, highLowTempTextView, rainPercentageTextView, windSpeedTextView, humidityPercentageTextView, currentTimeTextView;
-        private ImageView weatherIconImageView, rainIconImageView, windIconImageView, humidityIconImageView;
+        private ImageView weatherIconImageView, rainIconImageView, windIconImageView, humidityIconImageView, iconMap;
 
         private FusedLocationProviderClient fusedLocationProviderClient;
         private static final int REQUEST_LOCATION_PERMISSION = 1;
         private static final int REQUEST_CHECK_SETTINGS = 2;
 
         private CityManager cityManager;
-
+        private WeatherAPI weatherAPI;
         private FirebaseDatabaseHelper firebaseDatabaseHelper;
 
         @Override
@@ -72,8 +72,10 @@ import android.location.Address;
             windSpeedTextView = findViewById(R.id.wind_speed);
             humidityPercentageTextView = findViewById(R.id.humidity_percentage);
             currentTimeTextView = findViewById(R.id.current_day_time);
-            layoutBackground = findViewById(R.id.layoutBackground);
+            iconMap = findViewById(R.id.icon_map);
 
+            layoutBackground = findViewById(R.id.layoutBackground);
+            weatherAPI = new WeatherAPI(this); // Khởi tạo WeatherAPI
 
             RecyclerView recyclerView = findViewById(R.id.hourly_forecast_recycler_view);
             LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -89,14 +91,19 @@ import android.location.Address;
             recyclerViewDaily.setAdapter(dailyForecastAdapter);
 
 
-
             ImageView bellIcon = findViewById(R.id.icon_bell);
             bellIcon.setOnClickListener(view -> {
                 DisasterWarningPopup warningPopup = new DisasterWarningPopup(this);
                 warningPopup.showDisasterWarning("Tokyo"); // Thay "Tokyo" bằng tên thành phố bạn muốn
             });
 
-
+            iconMap.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent1 = new Intent(MainActivity.this, MapActivity.class);
+                    startActivity(intent1);
+                }
+            });
 
             SetUpMain();
 
@@ -176,7 +183,7 @@ import android.location.Address;
 
                 @Override
                 public void onFailure(String errorMessage) {
-                    // Handle error (e.g., show a Toast or Log error)
+                    Toast.makeText(MainActivity.this, "Không thể lấy dữ liệu thời tiết: " + errorMessage, Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -234,8 +241,9 @@ import android.location.Address;
                     Toast.makeText(this, "Quyền truy cập vị trí thành công", Toast.LENGTH_SHORT).show();
                     checkLocationSettings();
                 } else {
-                    Intent intent = new Intent(this, CityForecastActivity.class);
-                    startActivity(intent);
+                    Toast.makeText(this, "Không có quyền truy cập vị trí", Toast.LENGTH_SHORT).show();
+                    ActivityCompat.requestPermissions(this, new String[]{
+                            Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION_PERMISSION);
                 }
             }
         }
@@ -254,7 +262,9 @@ import android.location.Address;
             Task<LocationSettingsResponse> task = client.checkLocationSettings(builder.build());
 
             task.addOnSuccessListener(locationSettingsResponse -> {
-                Toast.makeText(this, "cài đặt vị trí đạt yêu cầu", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, CityForecastActivity.class);
+                startActivity(intent);
+                getLocationAndWeather();
             });
 
             task.addOnFailureListener(this::onFailure);
@@ -279,7 +289,6 @@ import android.location.Address;
             super.onActivityResult(requestCode, resultCode, data);
             if (requestCode == REQUEST_CHECK_SETTINGS) {
                 if (resultCode == RESULT_OK) {
-
 
                     getLocationAndWeather();
                 } else {
@@ -307,7 +316,7 @@ import android.location.Address;
 
                     Toast.makeText(this, "Lấy vị trí thành công: " + latitude + ", " + longitude, Toast.LENGTH_SHORT).show();
 
-
+                    //CallApi(latitude,longitude);
                     Geocoder geocoder = new Geocoder(this, Locale.getDefault());
                     try {
                         List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
@@ -326,6 +335,7 @@ import android.location.Address;
                         Intent intent = new Intent(this, CityForecastActivity.class);
                         startActivity(intent);
                     }
+
                 } else {
                     Intent intent = new Intent(this, CityForecastActivity.class);
                     startActivity(intent);

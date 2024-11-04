@@ -4,7 +4,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-feature android:name="android.hardware.location.gps" android:required="true"/>
-    <uses-feature android:required="true" android:name="android.hardware.location"/>
+    <uses-feature android:name="android.hardware.location" android:required="true"/>
     <uses-feature android:name="android.hardware.wifi" android:required="true"/>
     <application
         android:allowBackup="true"
@@ -30,7 +30,6 @@
         <!-- Các Activity khác -->
         <activity android:name=".CurrentLocationWeatherActivity"/>
         <activity android:name=".CityForecastActivity" />
-        <activity android:name=".BackgroundChangeActivity"/>
-        <activity android:name=".WeatherActivity"/>
+        <activity android:name=".MapActivity"/>
     </application>
 </manifest>
